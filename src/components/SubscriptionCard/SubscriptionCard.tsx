@@ -27,7 +27,7 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
           title,
           description,
           price,
-          details: 'Дополнительная информация об этом абонементе',
+          details: `${description}`,
         })
       } // Открытие модального окна
     >

@@ -1,50 +1,33 @@
-<!-- # React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-``` -->
+src/
+│
+├── app/ # Главные файлы и настройки приложения (router, providers)
+│ ├── App.tsx
+│ └── index.tsx
+│
+├── components/ # Переиспользуемые UI-компоненты
+│ ├── contactForm/ # Компонент формы контактов
+│ ├── footer/ # Компонент футера
+│ ├── musicCard
+│ ├── SubscriptionCard
+│ ├── modal/ # Модальные окна
+│ ├── navbar/ # Навигационная панель
+│ └── ui/ # UI-компоненты (например, карточки)
+│
+├── pages/ # Страницы приложения
+│ ├── adminDashboard/
+│ ├── contact/
+│ ├── home/
+│ ├── login/
+│ ├── musicDirections/
+│ └── subscriptions/
+│ └── not-fount-404
+│
+├── services/ # Логика работы с состоянием или API
+│ ├── store/ # Состояние приложения (например, MobX)
+│ │ ├── AuthStore.ts
+│ │ ├── MusicStore.ts
+│ │ └── SubscriptionStore.ts
+│ └── root-store-context.ts # Контекст состояния
+│
+└── utils/ # Вспомогательные функции (утилиты)
+└── formatDate.ts

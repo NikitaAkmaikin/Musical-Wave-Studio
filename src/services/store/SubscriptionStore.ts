@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { makeAutoObservable } from 'mobx';
-// import { createContext, useContext } from 'react';
 
 interface Subscription {
   id: number;
@@ -10,32 +10,11 @@ interface Subscription {
 }
 
 class SubscriptionStore {
-  subscriptions: Subscription[] = [
-    {
-      id: 1,
-      title: 'Абонемент 1 месяц',
-      description: 'Доступ на 1 месяц',
-      price: '5000 руб.',
-      details: 'Подробная информация о 1-месячном абонементе.',
-    },
-    {
-      id: 2,
-      title: 'Абонемент 3 месяца',
-      description: 'Доступ на 3 месяца',
-      price: '14000 руб.',
-      details: 'Подробная информация о 3-месячном абонементе.',
-    },
-    {
-      id: 3,
-      title: 'Пробное занятие',
-      description: 'Одно занятие для ознакомления',
-      price: '1000 руб.',
-      details: 'Подробная информация о пробном занятии.',
-    },
-  ];
-
+  subscriptions: Subscription[] = [];
   selectedSubscription: Subscription | null = null; // Выбранная подписка
   isModalVisible = false;
+  isLoading = false; // Для отслеживания состояния загрузки
+  error: string | null = null; // Для хранения ошибок
 
   constructor() {
     makeAutoObservable(this);
@@ -52,8 +31,41 @@ class SubscriptionStore {
     this.selectedSubscription = null;
     this.isModalVisible = false;
   }
+
+  // Метод для получения всех абонементов с сервера
+  async fetchSubscriptions() {
+    this.isLoading = true;
+    this.error = null;
+
+    try {
+      const response = await axios.get(
+        'http://localhost:5000/api/subscriptions'
+      );
+      this.subscriptions = response.data; // Обновляем список абонементов
+    } catch (error) {
+      this.error = 'Не удалось загрузить абонементы';
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  // Метод для добавления нового абонемента
+  async addSubscription(newSubscription: Omit<Subscription, 'id'>) {
+    this.isLoading = true;
+    this.error = null;
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/subscriptions',
+        newSubscription
+      );
+      this.subscriptions.push(response.data); // Добавляем новый абонемент в список
+    } catch (error) {
+      this.error = 'Не удалось добавить абонемент';
+    } finally {
+      this.isLoading = false;
+    }
+  }
 }
 
 export default new SubscriptionStore();
-// const SubscriptionStoreContext = createContext(new SubscriptionStore());
-// export const useSubscriptionStore = () => useContext(SubscriptionStoreContext);

@@ -80,3 +80,23 @@ button:focus-visible {
   color: rgb(255, 255, 0);
   text-align: center;
 }
+
+.ant-splitter-bar-dragger {
+  /* background-color: #646cff; */
+  /* background: #e6f4ff; */
+}
+
+:where(.css-dev-only-do-not-override-5wsri9).ant-splitter-horizontal
+  > .ant-splitter-bar
+  .ant-splitter-bar-dragger:after {
+  background-color: blue;
+}
+
+:where(.css-dev-only-do-not-override-5wsri9).ant-splitter-horizontal
+  > .ant-splitter-bar
+  .ant-splitter-bar-dragger {
+  cursor: col-resize;
+  height: 100%;
+  width: 6px;
+  background: rgba(66, 97, 225, 0.393);
+}
