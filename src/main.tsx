@@ -5,11 +5,11 @@ import { spy } from 'mobx';
 
 import Routes from './routes';
 
-spy(ev => {
-  if (ev.type === 'action') {
-    console.log(ev);
-  }
-});
+// spy(ev => {
+//   if (ev.type === 'action') {
+//     console.log(ev);
+//   }
+// });
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

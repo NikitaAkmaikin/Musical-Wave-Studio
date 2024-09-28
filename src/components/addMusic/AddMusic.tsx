@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import s from'./AddMusic.module.scss'; // Подключаем стили
+import s from './AddMusic.module.scss'; // Подключаем стили
+import { useStores } from '../../services/root-store-context';
 
 const AddSubscription: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [details, setDetails] = useState('');
+  const { musicStore } = useStores();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const resetUse = () => {
+    setTitle('');
+    setDescription('');
+    setImage('');
+    setDetails('');
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     // Данные для отправки
@@ -19,26 +27,16 @@ const AddSubscription: React.FC = () => {
       details,
     };
 
-    // Отправка POST-запроса на сервер
-    axios
-      .post('http://localhost:5000/api/music-directions', newMusic)
-      .then(response => {
-        console.log('Музыкальное направление успешно добавлен:', response.data);
-        setTitle('');
-        setDescription('');
-        setImage('');
-        setDetails('');
-      })
-      .catch(error => {
-        console.error('Ошибка при добавлении Музыкального направления:', error);
-      });
-
-    setTitle('');
+    musicStore.addDirection(newMusic);
+    await resetUse();
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.subscriptionForm}>
-      <h2>Добавить новый абонемент</h2>
+    <form
+      onSubmit={handleSubmit}
+      className={s.subscriptionForm}
+    >
+      <h2>Добавить новое мероприятие</h2>
       <input
         type="text"
         value={title}
@@ -63,7 +61,7 @@ const AddSubscription: React.FC = () => {
         required
         className={s.formInput}
       />
-       <input
+      <input
         type="text"
         value={details}
         onChange={e => setDetails(e.target.value)}
@@ -71,7 +69,12 @@ const AddSubscription: React.FC = () => {
         required
         className={s.formInput}
       />
-      <button type="submit" className={s.submitBtn}>Добавить</button>
+      <button
+        type="submit"
+        className={s.submitBtn}
+      >
+        Добавить
+      </button>
     </form>
   );
 };

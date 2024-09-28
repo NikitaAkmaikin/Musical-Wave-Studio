@@ -7,7 +7,7 @@ import SubscriptionModal from '../../components/modal/SubscriptionModal';
 import { useStores } from '../../services/root-store-context';
 import AddSubscription from '../../components/addSubscription/AddSubscription';
 
-export const Subscriptions:FC = observer(() => {
+export const Subscriptions: FC = observer(() => {
   const { subscriptionStore } = useStores();
 
   useEffect(() => {
@@ -25,9 +25,12 @@ export const Subscriptions:FC = observer(() => {
 
   return (
     <div>
-      <h1 style={{textAlign: 'center'}}>Абонементы</h1>
+      <h1 style={{ textAlign: 'center' }}>Абонементы</h1>
       <AddSubscription />
-      <Row gutter={[16, 16]}>
+      <Row
+        gutter={[16, 16]}
+        style={{ boxSizing: 'border-box' }}
+      >
         {subscriptionStore.subscriptions.map(subscription => (
           <Col
             key={subscription.id}

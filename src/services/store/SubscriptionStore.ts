@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 interface Subscription {
   id: number;
@@ -41,11 +41,15 @@ class SubscriptionStore {
       const response = await axios.get(
         'http://localhost:5000/api/subscriptions'
       );
-      this.subscriptions = response.data; // Обновляем список абонементов
+      runInAction(() => {
+        this.subscriptions = response.data; // Обновляем список абонементов
+      });
     } catch (error) {
       this.error = 'Не удалось загрузить абонементы';
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 
@@ -62,6 +66,23 @@ class SubscriptionStore {
       this.subscriptions.push(response.data); // Добавляем новый абонемент в список
     } catch (error) {
       this.error = 'Не удалось добавить абонемент';
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  // Метод для удаления абонемента
+  async deleteSubscription(id: number) {
+    this.isLoading = true;
+    this.error = null;
+
+    try {
+      await axios.delete(`http://localhost:5000/api/subscriptions/${id}`);
+      this.subscriptions = this.subscriptions.filter(
+        subscription => subscription.id !== id
+      ); // Удаляем абонемент из состояния
+    } catch (error) {
+      this.error = 'Ошибка при удалении абонемента';
     } finally {
       this.isLoading = false;
     }

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { makeAutoObservable } from 'mobx';
-import { createContext, useContext } from 'react';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 interface MusicDirection {
   id: number;
@@ -42,11 +41,15 @@ class MusicStore {
       const response = await axios.get(
         'http://localhost:5000/api/music-directions'
       );
-      this.directions = response.data; // Обновляем список музыкальных направлений
+      runInAction(() => {
+        this.directions = response.data; // Обновляем список музыкальных направлений
+      });
     } catch (error) {
       this.error = 'Ошибка при загрузке музыкальных направлений';
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 
@@ -60,16 +63,29 @@ class MusicStore {
         'http://localhost:5000/api/music-directions',
         newDirection
       );
-      this.directions.push(response.data); // Добавляем новое направление в список
+      this.directions.push(response.data); // Добавляем новое направление с ID, полученным с сервера
     } catch (error) {
       this.error = 'Ошибка при добавлении музыкального направления';
     } finally {
       this.isLoading = false;
     }
   }
-}
 
-const MusicStoreContext = createContext(new MusicStore());
-export const useMusicStore = () => useContext(MusicStoreContext);
+  // Метод для удаления музыкального направления
+  async deleteDirection(id: number) {
+    this.isLoading = true;
+    this.error = null;
+    try {
+      await axios.delete(`http://localhost:5000/api/music-directions/${id}`);
+      this.directions = this.directions.filter(
+        direction => direction.id !== id
+      ); // Удаляем направление из состояния
+    } catch (error) {
+      this.error = 'Ошибка при удалении музыкального направления';
+    } finally {
+      this.isLoading = false;
+    }
+  }
+}
 
 export default new MusicStore();

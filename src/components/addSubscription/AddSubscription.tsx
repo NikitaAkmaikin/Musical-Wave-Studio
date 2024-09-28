@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import s from'./AddSubscription.module.scss'; // Подключаем стили
+import s from './AddSubscription.module.scss'; // Подключаем стили
 
 const AddSubscription: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -29,7 +29,10 @@ const AddSubscription: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.subscriptionForm}>
+    <form
+      onSubmit={handleSubmit}
+      className={s.subscriptionForm}
+    >
       <h2>Добавить новый абонемент</h2>
       <input
         type="text"
@@ -55,7 +58,7 @@ const AddSubscription: React.FC = () => {
         required
         className={s.formInput}
       />
-       <input
+      <input
         type="text"
         value={details}
         onChange={e => setDetails(e.target.value)}
@@ -63,7 +66,12 @@ const AddSubscription: React.FC = () => {
         required
         className={s.formInput}
       />
-      <button type="submit" className={s.submitBtn}>Добавить</button>
+      <button
+        type="submit"
+        className={s.submitBtn}
+      >
+        Добавить
+      </button>
     </form>
   );
 };

@@ -24,12 +24,15 @@ export const MusicDirections: React.FC = observer(() => {
 
   return (
     <div>
-      <h1 style={{textAlign: 'center'}}>Музыкальные направления</h1>
+      <h1 style={{ textAlign: 'center' }}>Музыкальные направления</h1>
       <AddMusic />
       {musicStore.directions.length <= 0 ? (
         <p>Ничего нет</p>
       ) : (
-        <Row gutter={[16, 16]}>
+        <Row
+          gutter={[16, 16]}
+          style={{ boxSizing: 'border-box' }}
+        >
           {musicStore.directions.map(direction => (
             <Col
               key={direction.id}
