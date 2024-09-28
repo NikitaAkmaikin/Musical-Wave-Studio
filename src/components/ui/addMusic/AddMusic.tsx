@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from './AddMusic.module.scss'; // Подключаем стили
-import { useStores } from '../../services/root-store-context';
+import { useStores } from '../../../services/root-store-context';
 
 const AddSubscription: React.FC = () => {
   const [title, setTitle] = useState('');

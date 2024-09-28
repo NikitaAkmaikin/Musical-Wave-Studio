@@ -3,9 +3,9 @@ import { observer } from 'mobx-react-lite';
 import { Row, Col } from 'antd';
 import SubscriptionCard from '../../components/SubscriptionCard/SubscriptionCard';
 
-import SubscriptionModal from '../../components/modal/SubscriptionModal';
+import SubscriptionModal from '../../components/ui/modal/SubscriptionModal';
 import { useStores } from '../../services/root-store-context';
-import AddSubscription from '../../components/addSubscription/AddSubscription';
+import AddSubscription from '../../components/ui/addSubscription/AddSubscription';
 
 export const Subscriptions: FC = observer(() => {
   const { subscriptionStore } = useStores();

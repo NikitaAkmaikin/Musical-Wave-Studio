@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-// import s from './Navbar.module.scss';
 import {
   HomeFilled,
   StarFilled,

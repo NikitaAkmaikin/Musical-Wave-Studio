@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../../services/root-store-context';
+import { useStores } from '../../../services/root-store-context';
 
 const MusicModal: FC = observer(() => {
   const { musicStore } = useStores();

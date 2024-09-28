@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Row, Col } from 'antd';
 import MusicCard from '../../components/musicCard/MusicCard';
-import MusicModal from '../../components/modal/MusicModal';
+import MusicModal from '../../components/ui/modal/MusicModal';
 import { useStores } from '../../services/root-store-context';
-import AddMusic from '../../components/addMusic/AddMusic';
+import AddMusic from '../../components/ui/addMusic/AddMusic';
 
 export const MusicDirections: React.FC = observer(() => {
   const { musicStore } = useStores();
