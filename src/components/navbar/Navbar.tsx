@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 // import s from './Navbar.module.scss';
-import { HomeFilled, StarFilled, IdcardFilled, MailOutlined } from '@ant-design/icons';
+import {
+  HomeFilled,
+  StarFilled,
+  IdcardFilled,
+  MailOutlined,
+} from '@ant-design/icons';
 import { Avatar, Menu, MenuProps } from 'antd';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -11,38 +16,47 @@ const items: MenuItem[] = [
     label: (
       <NavLink to="/">
         <Avatar
-          src={<img src={url} alt="avatar" />}
+          src={
+            <img
+              src={url}
+              alt="avatar"
+            />
+          }
         />
       </NavLink>
     ),
-    key: "logo",
+    key: 'logo',
   },
   {
     label: <NavLink to="/">Главная</NavLink>,
-    key: "home",
+    key: 'home',
     icon: <HomeFilled />,
   },
   {
     label: <NavLink to="/music-directions">Музыкальные направления</NavLink>,
-    key: "music-directions",
+    key: 'music-directions',
     icon: <StarFilled />,
   },
   {
     label: <NavLink to="/subscriptions">Абонементы</NavLink>,
-    key: "subscriptions",
+    key: 'subscriptions',
     icon: <IdcardFilled />,
   },
   {
     label: <NavLink to="/contact">Контакты</NavLink>,
-    key: "contact",
+    key: 'contact',
     icon: <MailOutlined />,
   },
 ];
 
-const Navbar:FC = () => {
-
-  return ( <Menu mode="horizontal" items={items} style={{ display: 'flex',
-    justifyContent: 'center', }}/> )
-}
+const Navbar: FC = () => {
+  return (
+    <Menu
+      mode="horizontal"
+      items={items}
+      style={{ display: 'flex', justifyContent: 'center' }}
+    />
+  );
+};
 
 export default Navbar;

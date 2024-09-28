@@ -28,7 +28,8 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #2255cd;
+  /* background-color: #2255cd; */
+  background-color: #000;
   /* background-image: ''; */
   min-height: 100vh;
 }
@@ -73,7 +74,6 @@ button:focus-visible {
 
 .text-primary-700 {
   color: rgb(255, 255, 0);
-
 }
 
 .active {

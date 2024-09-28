@@ -27,19 +27,18 @@
   text-align: center;
 }
 
-.body{
+.body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.header{
+.header {
   flex: 0 0 auto;
-  
 }
 
-.main{
+.main {
   flex: 1;
   max-width: 1200px;
   padding: 20px;
@@ -47,6 +46,6 @@
   margin: 0 auto;
 }
 
-.footer{
+.footer {
   flex: 0;
 }

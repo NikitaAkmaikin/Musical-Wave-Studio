@@ -1,10 +1,5 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-export const AdminDashboard:FC  = () => {
-  
-  
-  return (
-    <>
-    </>
-  )
-}
+export const AdminDashboard: FC = () => {
+  return <></>;
+};

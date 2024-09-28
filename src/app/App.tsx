@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/footer/footer';
-import s from './app.module.scss'
+import s from './app.module.scss';
 import Navbar from '../components/navbar/Navbar';
 const App = () => {
-  
   return (
     <div className={s.body}>
       <header className={s.header}>

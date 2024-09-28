@@ -1,1 +1,1 @@
-export { MusicDirections } from "./MusicDirections";
+export { MusicDirections } from './MusicDirections';

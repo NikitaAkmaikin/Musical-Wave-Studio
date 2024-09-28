@@ -1,14 +1,14 @@
-import { createContext, useContext } from "react";
-import RootStore from "./root-store";
+import { createContext, useContext } from 'react';
+import RootStore from './root-store';
 
-export const RootStoreContext = createContext<RootStore | null>(null)
+export const RootStoreContext = createContext<RootStore | null>(null);
 
 export const useStores = () => {
   const context = useContext(RootStoreContext);
 
   if (context === null) {
-    throw new Error('Не обернули приложение App в провайдер')
+    throw new Error('Не обернули приложение App в провайдер');
   }
 
-  return context
-}
+  return context;
+};

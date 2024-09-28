@@ -6,18 +6,42 @@ interface MusicDirection {
   title: string;
   description: string;
   image: string;
-  details: string;  // Добавляем поле для подробной информации
+  details: string; // Добавляем поле для подробной информации
 }
 
 class MusicStore {
   directions: MusicDirection[] = [
-    { id: 1, title: 'Барабаны', description: 'Описание курса по барабанам', image: '/images/drums.jpg', details: 'Подробная информация о курсе по барабанам.' },
-    { id: 2, title: 'Гитара', description: 'Описание курса по гитаре', image: '/images/guitar.jpg', details: 'Подробная информация о курсе по гитаре.' },
-    { id: 3, title: 'Клавишные', description: 'Описание курса по клавишным', image: '/images/piano.jpg', details: 'Подробная информация о курсе по клавишным.' },
-    { id: 4, title: 'Вокал', description: 'Описание курса по вокалу', image: '/images/vocal.jpg', details: 'Подробная информация о курсе по вокалу.' },
+    {
+      id: 1,
+      title: 'Барабаны',
+      description: 'Описание курса по барабанам',
+      image: '/images/drums.jpg',
+      details: 'Подробная информация о курсе по барабанам.',
+    },
+    {
+      id: 2,
+      title: 'Гитара',
+      description: 'Описание курса по гитаре',
+      image: '/images/guitar.jpg',
+      details: 'Подробная информация о курсе по гитаре.',
+    },
+    {
+      id: 3,
+      title: 'Клавишные',
+      description: 'Описание курса по клавишным',
+      image: '/images/piano.jpg',
+      details: 'Подробная информация о курсе по клавишным.',
+    },
+    {
+      id: 4,
+      title: 'Вокал',
+      description: 'Описание курса по вокалу',
+      image: '/images/vocal.jpg',
+      details: 'Подробная информация о курсе по вокалу.',
+    },
   ];
 
-  selectedDirection: MusicDirection | null = null;  // Выбранное музыкальное направление
+  selectedDirection: MusicDirection | null = null; // Выбранное музыкальное направление
   isModalVisible = false;
 
   constructor() {
@@ -37,5 +61,4 @@ class MusicStore {
   }
 }
 
-const MusicStoreContext = createContext(new MusicStore());
-export const useMusicStore = () => useContext(MusicStoreContext);
+export default new MusicStore();

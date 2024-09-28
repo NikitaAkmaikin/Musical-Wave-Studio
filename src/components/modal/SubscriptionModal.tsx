@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { useSubscriptionStore } from '../../services/store/SubscriptionStore';
+import { useStores } from '../../services/root-store-context';
 
-const SubscriptionModal:FC = observer(() => {
-  const subscriptionStore = useSubscriptionStore();
+const SubscriptionModal: FC = observer(() => {
+  const { subscriptionStore } = useStores();
 
   return (
     <Modal
@@ -13,7 +13,9 @@ const SubscriptionModal:FC = observer(() => {
       onCancel={() => subscriptionStore.closeModal()}
       footer={null}
     >
-      <p><strong>Цена: {subscriptionStore.selectedSubscription?.price}</strong></p>
+      <p>
+        <strong>Цена: {subscriptionStore.selectedSubscription?.price}</strong>
+      </p>
       <p>{subscriptionStore.selectedSubscription?.details}</p>
     </Modal>
   );

@@ -1,7 +1,9 @@
-import postStore from "./store/post-store";
+import MusicStore from './store/MusicStore';
+import SubscriptionStore from './store/SubscriptionStore';
 
 class RootStore {
-  post = postStore;
+  musicStore = MusicStore;
+  subscriptionStore = SubscriptionStore;
 }
 
-export default RootStore
+export default RootStore;
