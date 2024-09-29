@@ -28,9 +28,9 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  /* background-color: #2255cd; */
-  background-color: #000;
-  /* background-image: ''; */
+  background-color: #0c46ce;
+  /* background-color: #000; */
+  color: #fff;
   min-height: 100vh;
 }
 

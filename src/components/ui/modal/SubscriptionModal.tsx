@@ -2,22 +2,11 @@ import { FC } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
-import { useUser } from '../../../services/store/UserContext';
+import { Link } from 'react-router-dom';
 
 const SubscriptionModal: FC = observer(() => {
   const { subscriptionStore } = useStores();
-  const { user } = useUser();
 
-  const handleDelete = () => {
-    const directionId = subscriptionStore.selectedSubscription?.id;
-    if (directionId !== undefined) {
-      subscriptionStore.deleteSubscription(directionId);
-      subscriptionStore.closeModal();
-    } else {
-      // Обработка случая, когда id не определен (например, показать сообщение об ошибке)
-      console.error('Direction ID is undefined');
-    }
-  };
   return (
     <Modal
       title={subscriptionStore.selectedSubscription?.title}
@@ -29,14 +18,9 @@ const SubscriptionModal: FC = observer(() => {
         <strong>Цена: {subscriptionStore.selectedSubscription?.price}</strong>
       </p>
       <p>{subscriptionStore.selectedSubscription?.details}</p>
-      {user && (
-        <Button
-          type="text"
-          onClick={handleDelete}
-        >
-          Удалить
-        </Button>
-      )}
+      <Link to="/contact">
+        <Button type="primary">Связаться с нами</Button>
+      </Link>
     </Modal>
   );
 });

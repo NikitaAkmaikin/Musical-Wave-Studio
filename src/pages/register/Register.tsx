@@ -12,9 +12,12 @@ const Register: React.FC = () => {
 
     try {
       // Отправляем запрос на сервер для регистрации
-      const response = await axios.post('http://localhost:5000/api/auth/register', values);
+      const response = await axios.post(
+        'http://localhost:5000/api/auth/register',
+        values
+      );
       notification.success({ message: 'Успешная регистрация' });
-      
+
       // Сохраняем токен и перенаправляем пользователя на главную страницу
       const { token } = response.data;
       localStorage.setItem('token', token);
@@ -31,11 +34,17 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Form onFinish={onFinish} layout="vertical">
+    <Form
+      onFinish={onFinish}
+      layout="vertical"
+    >
       <Form.Item
         name="email"
         label="Email"
-        rules={[{ required: true, message: 'Введите email' }, { type: 'email', message: 'Введите корректный email' }]}
+        rules={[
+          { required: true, message: 'Введите email' },
+          { type: 'email', message: 'Введите корректный email' },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -47,7 +56,11 @@ const Register: React.FC = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" loading={isLoading}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isLoading}
+        >
           Зарегистрироваться
         </Button>
       </Form.Item>

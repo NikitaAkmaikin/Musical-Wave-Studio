@@ -5,12 +5,9 @@ import SubscriptionCard from '../../components/SubscriptionCard/SubscriptionCard
 
 import SubscriptionModal from '../../components/ui/modal/SubscriptionModal';
 import { useStores } from '../../services/root-store-context';
-import AddSubscription from '../../components/ui/addSubscription/AddSubscription';
-import { useUser } from '../../services/store/UserContext';
 
 export const Subscriptions: FC = observer(() => {
   const { subscriptionStore } = useStores();
-  const { user } = useUser();
 
   useEffect(() => {
     // Загружаем абонементы при монтировании компонента
@@ -28,7 +25,6 @@ export const Subscriptions: FC = observer(() => {
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Абонементы</h1>
-      {user && <AddSubscription />}
       <Row
         gutter={[16, 16]}
         style={{ boxSizing: 'border-box' }}

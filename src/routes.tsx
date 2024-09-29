@@ -57,7 +57,7 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/admin",
+    path: '/admin',
     element: (
       <PrivateRoute>
         <AdminDashboard />
@@ -65,18 +65,22 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "music-card",
+        path: '/admin',
         element: (
           <PrivateRoute>
-            <MusicCardManagement />
+            <RootStoreContext.Provider value={new RootStore()}>
+              <MusicCardManagement />
+            </RootStoreContext.Provider>
           </PrivateRoute>
         ),
       },
       {
-        path: "subscription-card",
+        path: 'subscription-card',
         element: (
           <PrivateRoute>
-            <SubscriptionCardManagement />
+            <RootStoreContext.Provider value={new RootStore()}>
+              <SubscriptionCardManagement />
+            </RootStoreContext.Provider>
           </PrivateRoute>
         ),
       },

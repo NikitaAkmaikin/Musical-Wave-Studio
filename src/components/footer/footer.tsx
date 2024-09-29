@@ -14,9 +14,7 @@ const Footer: React.FC = () => {
 
       {user ? (
         <>
-          <Menu.Item>
-            Привет, {user.email}!
-          </Menu.Item>
+          <Menu.Item>Привет, {user.email}!</Menu.Item>
           {user.isAdmin && (
             <Menu.Item>
               <Link to="/admin">Админ-панель</Link>

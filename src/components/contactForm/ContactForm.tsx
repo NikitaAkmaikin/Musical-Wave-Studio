@@ -1,10 +1,12 @@
 import { FC, useState } from 'react';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
+import { useUser } from '../../services/store/UserContext';
 
 const ContactForm: FC = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser();
 
   const onFinish = async (values: any) => {
     setIsLoading(true);
@@ -48,14 +50,17 @@ const ContactForm: FC = () => {
         rules={[{ required: true, message: 'Введите имя' }]}
         style={{ color: '#fff' }}
       >
-        <Input />
+        <Input placeholder={user?.email} />
       </Form.Item>
       <Form.Item
         name="email"
         label="Email"
         rules={[{ required: true, message: 'Введите email' }]}
       >
-        <Input />
+        <Input
+          defaultValue={user?.email}
+          placeholder={user?.email}
+        />
       </Form.Item>
       <Form.Item
         name="message"

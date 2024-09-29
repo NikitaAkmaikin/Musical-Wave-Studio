@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Button } from 'antd';
 import { useUser } from '../../services/store/UserContext';
 
@@ -17,7 +17,11 @@ const AdminDashboard: React.FC = () => {
       <p>Добро пожаловать, {user.email}</p>
 
       <div style={{ display: 'flex', gap: '20px' }}>
-        <Link to="/admin/music-card">
+        <Link to="/">
+          <Button type="primary">Вернуться на Главную</Button>
+        </Link>
+
+        <Link to="/admin">
           <Button type="primary">Управление музыкальными направлениями</Button>
         </Link>
 
@@ -25,6 +29,7 @@ const AdminDashboard: React.FC = () => {
           <Button type="primary">Управление абонементами</Button>
         </Link>
       </div>
+      <Outlet />
     </div>
   );
 };

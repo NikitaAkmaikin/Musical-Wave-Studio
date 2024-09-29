@@ -2,22 +2,10 @@ import { FC } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
-import { useUser } from '../../../services/store/UserContext';
+import { Link } from 'react-router-dom';
 
 const MusicModal: FC = observer(() => {
   const { musicStore } = useStores();
-  const { user } = useUser();
-
-  const handleDelete = () => {
-    const directionId = musicStore.selectedDirection?.id;
-    if (directionId !== undefined) {
-      musicStore.deleteDirection(directionId);
-      musicStore.closeModal();
-    } else {
-      // Обработка случая, когда id не определен (например, показать сообщение об ошибке)
-      console.error('Direction ID is undefined');
-    }
-  };
 
   return (
     <Modal
@@ -33,14 +21,9 @@ const MusicModal: FC = observer(() => {
       />
       <p>{musicStore.selectedDirection?.details}</p>
 
-      {user && (
-        <Button
-          type="text"
-          onClick={handleDelete}
-        >
-          Удалить
-        </Button>
-      )}
+      <Link to="/contact">
+        <Button type="primary">Связаться с нами</Button>
+      </Link>
     </Modal>
   );
 });
