@@ -2,9 +2,11 @@ import { FC } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
+import { useUser } from '../../../services/store/UserContext';
 
 const MusicModal: FC = observer(() => {
   const { musicStore } = useStores();
+  const { user } = useUser();
 
   const handleDelete = () => {
     const directionId = musicStore.selectedDirection?.id;
@@ -31,12 +33,14 @@ const MusicModal: FC = observer(() => {
       />
       <p>{musicStore.selectedDirection?.details}</p>
 
-      <Button
-        type="text"
-        onClick={handleDelete}
-      >
-        Удалить
-      </Button>
+      {user && (
+        <Button
+          type="text"
+          onClick={handleDelete}
+        >
+          Удалить
+        </Button>
+      )}
     </Modal>
   );
 });

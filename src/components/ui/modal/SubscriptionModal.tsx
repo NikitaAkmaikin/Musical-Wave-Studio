@@ -2,9 +2,12 @@ import { FC } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
+import { useUser } from '../../../services/store/UserContext';
 
 const SubscriptionModal: FC = observer(() => {
   const { subscriptionStore } = useStores();
+  const { user } = useUser();
+
   const handleDelete = () => {
     const directionId = subscriptionStore.selectedSubscription?.id;
     if (directionId !== undefined) {
@@ -26,12 +29,14 @@ const SubscriptionModal: FC = observer(() => {
         <strong>Цена: {subscriptionStore.selectedSubscription?.price}</strong>
       </p>
       <p>{subscriptionStore.selectedSubscription?.details}</p>
-      <Button
-        type="text"
-        onClick={handleDelete}
-      >
-        Удалить
-      </Button>
+      {user && (
+        <Button
+          type="text"
+          onClick={handleDelete}
+        >
+          Удалить
+        </Button>
+      )}
     </Modal>
   );
 });

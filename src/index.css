@@ -100,3 +100,10 @@ button:focus-visible {
   width: 6px;
   background: rgba(66, 97, 225, 0.393);
 }
+
+@media (max-width: 560px) {
+  h1 {
+    font-size: 2.2em;
+    line-height: 1.1;
+  }
+}

@@ -1,63 +1,57 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useUser } from '../../services/store/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, notification } from 'antd';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    // Отправка данных для логина
-    axios
-      .post('http://localhost:5000/api/auth/login', { email, password })
-      .then(response => {
-        const token = response.data.token;
-        localStorage.setItem('token', token); // Сохраняем токен в localStorage
-        console.log('Авторизация успешна!');
-      })
-      .catch(error => {
-        console.error('Ошибка при авторизации:', error);
-      });
+  const onFinish = async (values: any) => {
+    setIsLoading(true);
+    try {
+      await login(values.email, values.password);
+      notification.success({ message: 'Успешный вход' });
+      navigate('/'); // Перенаправляем на главную страницу
+    } catch (error) {
+      console.error('Ошибка при входе:', error);
+      notification.error({ message: 'Неверные учетные данные' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Войти</h2>
-      <input
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="Пароль"
-        required
-      />
-      <button type="submit">Войти</button>
-    </form>
+    <Form
+      onFinish={onFinish}
+      layout="vertical"
+    >
+      <Form.Item
+        name="email"
+        label="Email"
+        rules={[{ required: true, message: 'Введите email' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        label="Пароль"
+        rules={[{ required: true, message: 'Введите пароль' }]}
+      >
+        <Input.Password />
+      </Form.Item>
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isLoading}
+        >
+          Войти
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
 export default Login;
-
-// import axios from 'axios';
-
-// const token = localStorage.getItem('token');  // Получаем токен из localStorage
-
-// axios.post('http://localhost:5000/api/music-directions', {
-//   title: 'Новое направление',
-//   description: 'Описание нового направления',
-// }, {
-//   headers: {
-//     Authorization: `Bearer ${token}`,  // Добавляем токен в заголовок
-//   },
-// }).then(response => {
-//   console.log('Новое направление создано:', response.data);
-// }).catch(error => {
-//   console.error('Ошибка при создании направления:', error);
-// });

@@ -6,6 +6,11 @@ import App from './app/App';
 import { RootStoreContext } from './services/root-store-context';
 import RootStore from './services/root-store';
 
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/login/Login';
+import AdminDashboard from './pages/adminDashboard/AdminDashboard';
+import { UserProvider } from './services/store/UserContext';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -20,7 +25,9 @@ const router = createBrowserRouter([
         path: 'music-directions',
         element: (
           <RootStoreContext.Provider value={new RootStore()}>
+            {/* <PrivateRoute> */}
             <MusicDirections />
+            {/* </PrivateRoute> */}
           </RootStoreContext.Provider>
         ), // Страница музыкальных направлений
       },
@@ -38,10 +45,26 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/admin',
+    element: (
+      <PrivateRoute>
+        <AdminDashboard />
+      </PrivateRoute>
+    ),
+  },
 ]);
 
 const Routes: FC = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 };
 
 export default Routes;

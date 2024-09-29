@@ -11,7 +11,10 @@ const ContactForm: FC = () => {
 
     try {
       // Отправляем данные формы на сервер
-      const response = await axios.post('http://localhost:5000/api/contact/send', values);
+      const response = await axios.post(
+        'http://localhost:5000/api/contact/send',
+        values
+      );
       console.log('Ответ сервера:', response.data);
 
       // Показываем уведомление об успешной отправке
@@ -43,6 +46,7 @@ const ContactForm: FC = () => {
         name="name"
         label="Имя"
         rules={[{ required: true, message: 'Введите имя' }]}
+        style={{ color: '#fff' }}
       >
         <Input />
       </Form.Item>

@@ -5,9 +5,12 @@ import MusicCard from '../../components/musicCard/MusicCard';
 import MusicModal from '../../components/ui/modal/MusicModal';
 import { useStores } from '../../services/root-store-context';
 import AddMusic from '../../components/ui/addMusic/AddMusic';
+import { useUser } from '../../services/store/UserContext';
+import s from './MusicDirections.module.scss';
 
 export const MusicDirections: React.FC = observer(() => {
   const { musicStore } = useStores();
+  const { user } = useUser();
 
   useEffect(() => {
     // Загружаем музыкальные направления при монтировании компонента
@@ -23,9 +26,9 @@ export const MusicDirections: React.FC = observer(() => {
   }
 
   return (
-    <div>
-      <h1 style={{ textAlign: 'center' }}>Музыкальные направления</h1>
-      <AddMusic />
+    <div className={s.container}>
+      <h1>Музыкальные направления</h1>
+      {user && <AddMusic />}
       {musicStore.directions.length <= 0 ? (
         <p>Ничего нет</p>
       ) : (
