@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { useUser } from '../../services/store/UserContext';
 import { Link } from 'react-router-dom';
 import { Menu, Button } from 'antd';
-import { useUser } from '../../services/store/UserContext';
 
-const Footer: FC = () => {
+const Footer: React.FC = () => {
   const { user, logout } = useUser();
 
   return (
@@ -14,7 +14,9 @@ const Footer: FC = () => {
 
       {user ? (
         <>
-          <Menu.Item>Привет, {user.email}!</Menu.Item>
+          <Menu.Item>
+            Привет, {user.email}!
+          </Menu.Item>
           {user.isAdmin && (
             <Menu.Item>
               <Link to="/admin">Админ-панель</Link>
@@ -25,9 +27,14 @@ const Footer: FC = () => {
           </Menu.Item>
         </>
       ) : (
-        <Menu.Item>
-          <Link to="/login">Войти</Link>
-        </Menu.Item>
+        <>
+          <Menu.Item>
+            <Link to="/login">Войти</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/register">Зарегистрироваться</Link>
+          </Menu.Item>
+        </>
       )}
     </Menu>
   );

@@ -10,11 +10,14 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/login/Login';
 import AdminDashboard from './pages/adminDashboard/AdminDashboard';
 import { UserProvider } from './services/store/UserContext';
+import Register from './pages/register/Register';
+import MusicCardManagement from './pages/music-card-management/MusicCardManagement';
+import SubscriptionCardManagement from './pages/subscription-card-management/SubscriptionCardManagement';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // Главный лэйаут с Navbar
+    element: <App />,
     errorElement: <NotFound404 />,
     children: [
       {
@@ -50,12 +53,34 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/admin',
+    path: '/register',
+    element: <Register />,
+  },
+  {
+    path: "/admin",
     element: (
       <PrivateRoute>
         <AdminDashboard />
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "music-card",
+        element: (
+          <PrivateRoute>
+            <MusicCardManagement />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "subscription-card",
+        element: (
+          <PrivateRoute>
+            <SubscriptionCardManagement />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 

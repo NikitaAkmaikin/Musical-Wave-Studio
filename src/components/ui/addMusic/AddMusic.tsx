@@ -16,7 +16,7 @@ const AddSubscription: React.FC = () => {
     setDetails('');
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     // Данные для отправки
@@ -28,7 +28,7 @@ const AddSubscription: React.FC = () => {
     };
 
     musicStore.addDirection(newMusic);
-    await resetUse();
+    resetUse();
   };
 
   return (
