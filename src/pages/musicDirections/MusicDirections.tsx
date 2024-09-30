@@ -28,17 +28,9 @@ export const MusicDirections: React.FC = observer(() => {
       {musicStore.directions.length <= 0 ? (
         <p>Ничего нет</p>
       ) : (
-        <Row
-          gutter={[16, 16]}
-          style={{ boxSizing: 'border-box' }}
-        >
+        <Row gutter={[16, 16]} style={{ boxSizing: 'border-box' }}>
           {musicStore.directions.map(direction => (
-            <Col
-              key={direction.id}
-              xs={24}
-              sm={12}
-              md={8}
-            >
+            <Col key={direction.id} xs={24} sm={12} md={8}>
               <MusicCard {...direction} />
             </Col>
           ))}

@@ -11,38 +11,36 @@ interface MusicDirection {
 
 class MusicStore {
   directions: MusicDirection[] = [];
-  selectedDirection: MusicDirection | null = null; // Выбранное музыкальное направление
+  selectedDirection: MusicDirection | null = null;
   isModalVisible = false;
-  isLoading = false; // Для отслеживания состояния загрузки
-  error: string | null = null; // Для хранения ошибок
+  isLoading = false;
+  error: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  // Метод для открытия модального окна
+  // Открытие модального окна
   openModal(direction: MusicDirection) {
     this.selectedDirection = direction;
     this.isModalVisible = true;
   }
 
-  // Метод для закрытия модального окна
+  // Закрытие модального окна
   closeModal() {
     this.selectedDirection = null;
     this.isModalVisible = false;
   }
 
-  // Метод для получения всех музыкальных направлений с сервера
+  // Получение всех музыкальных направлений с сервера
   async fetchDirections() {
     this.isLoading = true;
     this.error = null;
 
     try {
-      const response = await axios.get(
-        'http://localhost:5000/api/music-directions'
-      );
+      const response = await axios.get('http://localhost:5000/api/music-directions');
       runInAction(() => {
-        this.directions = response.data; // Обновляем список музыкальных направлений
+        this.directions = response.data;
       });
     } catch (error) {
       this.error = 'Ошибка при загрузке музыкальных направлений';
@@ -53,33 +51,40 @@ class MusicStore {
     }
   }
 
-  // Метод для добавления нового музыкального направления
-  async addMusic(newDirection: Omit<MusicDirection, 'id'>) {
+  // Метод для добавления нового музыкального направления (изменённый для работы с FormData)
+  async addMusic(newDirection: FormData) {
     this.isLoading = true;
     this.error = null;
-
+  
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/music-directions',
-        newDirection
-      );
-      this.directions.push(response.data); // Добавляем новое направление с ID, полученным с сервера
+      const response = await axios.post('http://localhost:5000/api/music-directions', newDirection, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Устанавливаем заголовок для отправки файлов
+        },
+      });
+      runInAction(() => {
+        this.directions.push(response.data);  // Добавляем новое направление
+      });
     } catch (error) {
       this.error = 'Ошибка при добавлении музыкального направления';
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
-
-  // Метод для удаления музыкального направления
+  
+  
+  // Удаление музыкального направления
   async deleteMusic(id: number) {
     this.isLoading = true;
     this.error = null;
+
     try {
       await axios.delete(`http://localhost:5000/api/music-directions/${id}`);
-      this.directions = this.directions.filter(
-        direction => direction.id !== id
-      ); // Удаляем направление из состояния
+      runInAction(() => {
+        this.directions = this.directions.filter(direction => direction.id !== id);
+      });
     } catch (error) {
       this.error = 'Ошибка при удалении музыкального направления';
     } finally {
