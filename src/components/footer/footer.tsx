@@ -1,41 +1,24 @@
-import React from 'react';
-import { useUser } from '../../services/store/UserContext';
-import { Link } from 'react-router-dom';
-import { Menu, Button } from 'antd';
+// import React, { memo } from 'react';
+// import { useUser } from '../../services/store/UserContext';
+// import { Link } from 'react-router-dom';
+// import { Menu } from 'antd';
 
-const Footer: React.FC = () => {
-  const { user, logout } = useUser();
+// const Footer: React.FC = memo(() => {
+//   const { user, logout } = useUser();
 
-  return (
-    <Menu mode="horizontal">
-      <Menu.Item>
-        <Link to="/">Главная</Link>
-      </Menu.Item>
+//   const items = [
+//     { label: <Link to="/">Главная</Link>, key: 'home' },
+//     user && { label: `Привет, ${user.email}!`, key: 'greeting' },
+//     user?.isAdmin && { label: <Link to="/admin">Админка</Link>, key: 'admin' },
+//     user
+//       ? { label: <span onClick={logout}>Выйти</span>, key: 'logout' }
+//       : [
+//           { label: <Link to="/login">Войти</Link>, key: 'login' },
+//           { label: <Link to="/register">Зарегистрироваться</Link>, key: 'register' },
+//         ],
+//   ].filter(Boolean).flat();
 
-      {user ? (
-        <>
-          <Menu.Item>Привет, {user.email}!</Menu.Item>
-          {user.isAdmin && (
-            <Menu.Item>
-              <Link to="/admin">Админ-панель</Link>
-            </Menu.Item>
-          )}
-          <Menu.Item>
-            <Button onClick={logout}>Выйти</Button>
-          </Menu.Item>
-        </>
-      ) : (
-        <>
-          <Menu.Item>
-            <Link to="/login">Войти</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/register">Зарегистрироваться</Link>
-          </Menu.Item>
-        </>
-      )}
-    </Menu>
-  );
-};
+//   return <Menu mode="horizontal" items={items} />;
+// });
 
-export default Footer;
+// export default Footer;

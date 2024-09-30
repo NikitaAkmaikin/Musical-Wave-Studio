@@ -1,79 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import axios from 'axios';
-import s from './AddSubscription.module.scss'; // Подключаем стили
+import s from './AddSubscription.module.scss';
+import { useStores } from '../../../services/root-store-context';
 
-const AddSubscription: React.FC = () => {
+const AddSubscription: React.FC = memo(() => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [details, setDetails] = useState('');
+  const { subscriptionStore } = useStores();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    subscriptionStore.addSubscription({ title, description, price, details });
+    resetFields();
+  };
 
-    const newSubscription = {
-      title,
-      description,
-      price,
-      details,
-    };
-
-    axios
-      .post('http://localhost:5000/api/subscriptions', newSubscription)
-      .then(response => {
-        console.log('Абонемент успешно добавлен:', response.data);
-      })
-      .catch(error => {
-        console.error('Ошибка при добавлении абонемента:', error);
-      });
+  const resetFields = () => {
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setDetails('');
   };
 
   return (
     <form
+      className={s.form}
       onSubmit={handleSubmit}
-      className={s.subscriptionForm}
     >
-      <h2>Добавить новый абонемент</h2>
       <input
-        type="text"
         value={title}
         onChange={e => setTitle(e.target.value)}
-        placeholder="Название абонемента"
-        required
-        className={s.formInput}
+        placeholder="Title"
       />
       <input
-        type="text"
         value={description}
         onChange={e => setDescription(e.target.value)}
-        placeholder="Описание"
-        required
-        className={s.formInput}
+        placeholder="Description"
       />
       <input
-        type="text"
         value={price}
         onChange={e => setPrice(e.target.value)}
-        placeholder="Цена"
-        required
-        className={s.formInput}
+        placeholder="Price"
       />
-      <input
-        type="text"
+      <textarea
         value={details}
         onChange={e => setDetails(e.target.value)}
-        placeholder="Подробная информация"
-        required
-        className={s.formInput}
+        placeholder="Details"
       />
-      <button
-        type="submit"
-        className={s.submitBtn}
-      >
-        Добавить
-      </button>
+      <button type="submit">Add Subscription</button>
     </form>
   );
-};
+});
 
 export default AddSubscription;

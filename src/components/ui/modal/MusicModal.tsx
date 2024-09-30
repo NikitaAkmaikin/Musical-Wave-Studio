@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
@@ -7,20 +7,22 @@ import { Link } from 'react-router-dom';
 const MusicModal: FC = observer(() => {
   const { musicStore } = useStores();
 
+  const handleClose = () => {
+    musicStore.closeModal();
+  };
+
   return (
     <Modal
       title={musicStore.selectedDirection?.title}
       open={musicStore.isModalVisible}
-      onCancel={() => musicStore.closeModal()}
+      onCancel={handleClose}
       footer={null}
     >
       <img
-        src={musicStore.selectedDirection?.image}
         alt={musicStore.selectedDirection?.title}
-        style={{ width: '100%', marginBottom: '20px' }}
+        src={musicStore.selectedDirection?.image}
       />
-      <p>{musicStore.selectedDirection?.details}</p>
-
+      <p>{musicStore.selectedDirection?.description}</p>
       <Link to="/contact">
         <Button type="primary">Связаться с нами</Button>
       </Link>
@@ -28,4 +30,4 @@ const MusicModal: FC = observer(() => {
   );
 });
 
-export default MusicModal;
+export default memo(MusicModal);

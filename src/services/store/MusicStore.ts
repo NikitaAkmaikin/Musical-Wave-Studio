@@ -54,7 +54,7 @@ class MusicStore {
   }
 
   // Метод для добавления нового музыкального направления
-  async addDirection(newDirection: Omit<MusicDirection, 'id'>) {
+  async addMusic(newDirection: Omit<MusicDirection, 'id'>) {
     this.isLoading = true;
     this.error = null;
 
@@ -72,7 +72,7 @@ class MusicStore {
   }
 
   // Метод для удаления музыкального направления
-  async deleteDirection(id: number) {
+  async deleteMusic(id: number) {
     this.isLoading = true;
     this.error = null;
     try {

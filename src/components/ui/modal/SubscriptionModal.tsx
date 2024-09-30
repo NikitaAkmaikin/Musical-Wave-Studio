@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Button, Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../services/root-store-context';
@@ -7,17 +7,18 @@ import { Link } from 'react-router-dom';
 const SubscriptionModal: FC = observer(() => {
   const { subscriptionStore } = useStores();
 
+  const handleClose = () => {
+    subscriptionStore.closeModal();
+  };
+
   return (
     <Modal
       title={subscriptionStore.selectedSubscription?.title}
       open={subscriptionStore.isModalVisible}
-      onCancel={() => subscriptionStore.closeModal()}
+      onCancel={handleClose}
       footer={null}
     >
-      <p>
-        <strong>Цена: {subscriptionStore.selectedSubscription?.price}</strong>
-      </p>
-      <p>{subscriptionStore.selectedSubscription?.details}</p>
+      <p>{subscriptionStore.selectedSubscription?.description}</p>
       <Link to="/contact">
         <Button type="primary">Связаться с нами</Button>
       </Link>
@@ -25,4 +26,4 @@ const SubscriptionModal: FC = observer(() => {
   );
 });
 
-export default SubscriptionModal;
+export default memo(SubscriptionModal);

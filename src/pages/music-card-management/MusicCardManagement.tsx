@@ -13,7 +13,7 @@ const MusicCardManagement: React.FC = observer(() => {
   }, [musicStore]);
 
   const onAddMusicCard = (values: any) => {
-    musicStore.addDirection(values);
+    musicStore.addMusic(values);
     form.resetFields();
   };
 
@@ -67,7 +67,7 @@ const MusicCardManagement: React.FC = observer(() => {
           <List.Item
             actions={[
               <Button
-                onClick={() => musicStore.deleteDirection(item.id)}
+                onClick={() => musicStore.deleteMusic(item.id)}
                 danger
               >
                 Удалить

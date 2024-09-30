@@ -1,40 +1,44 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Card } from 'antd';
 import { useStores } from '../../services/root-store-context';
 
 interface MusicCardProps {
   id: number;
   title: string;
-  description: string;
   image: string;
+  description: string;
 }
 
-const MusicCard: FC<MusicCardProps> = ({ id, title, description, image }) => {
-  const { musicStore } = useStores();
+const MusicCard: FC<MusicCardProps> = memo(
+  ({ id, title, description, image }) => {
+    const { musicStore } = useStores();
 
-  return (
-    <Card
-      hoverable
-      cover={
-        <img
-          alt={title}
-          src={image}
-        />
-      }
-      title={title}
-      onClick={() =>
-        musicStore.openModal({
-          id,
-          title,
-          description,
-          image,
-          details: 'Дополнительная информация об этом направлении',
-        })
-      } // Открытие модального окна
-    >
-      <p>{description}</p>
-    </Card>
-  );
-};
+    const handleCardClick = () => {
+      musicStore.openModal({
+        id,
+        title,
+        description,
+        image,
+        details: 'Дополнительная информация об этом направлении',
+      });
+    };
+
+    return (
+      <Card
+        hoverable
+        cover={
+          <img
+            alt={title}
+            src={image}
+          />
+        }
+        title={title}
+        onClick={handleCardClick}
+      >
+        <p>{description}</p>
+      </Card>
+    );
+  }
+);
 
 export default MusicCard;
