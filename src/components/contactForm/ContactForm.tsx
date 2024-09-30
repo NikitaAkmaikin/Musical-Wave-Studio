@@ -42,38 +42,52 @@ const ContactForm: FC = () => {
     <Form
       form={form}
       onFinish={onFinish}
-      layout="vertical"
+      layout="vertical" // Устанавливаем верстку формы вертикальной
+      style={{ maxWidth: '600px', margin: '0 auto' }} // Центрируем форму
     >
       <Form.Item
         name="name"
         label="Имя"
         rules={[{ required: true, message: 'Введите имя' }]}
-        style={{ color: '#fff' }}
       >
-        <Input placeholder={user?.email} />
+        {/* Мы не можем использовать defaultValue прямо в JSX с name */}
+        <Input placeholder="Введите ваше имя" />
       </Form.Item>
+
       <Form.Item
         name="email"
         label="Email"
-        rules={[{ required: true, message: 'Введите email' }]}
+        rules={[
+          {
+            required: true,
+            type: 'email',
+            message: 'Введите корректный email',
+          },
+        ]}
       >
         <Input
-          defaultValue={user?.email}
-          placeholder={user?.email}
+          // defaultValue={user?.email}
+          placeholder={user?.email || 'Введите ваш email'}
         />
       </Form.Item>
+
       <Form.Item
         name="message"
         label="Сообщение"
         rules={[{ required: true, message: 'Введите сообщение' }]}
       >
-        <Input.TextArea />
+        <Input.TextArea
+          placeholder="Введите ваше сообщение"
+          rows={4}
+        />
       </Form.Item>
+
       <Form.Item>
         <Button
           type="primary"
           htmlType="submit"
           loading={isLoading}
+          block // Кнопка будет занимать всю ширину
         >
           Отправить
         </Button>

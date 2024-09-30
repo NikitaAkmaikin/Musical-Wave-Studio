@@ -107,3 +107,13 @@ button:focus-visible {
     line-height: 1.1;
   }
 }
+
+.backgrountCard {
+  background-color: #fff;
+}
+
+.flex-direction-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

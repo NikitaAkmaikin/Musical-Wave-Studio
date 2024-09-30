@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Button } from 'antd';
 import { useUser } from '../../services/store/UserContext';
-
+import s from './AdminDashboard.module.scss';
+import { ArrowLeftOutlined, IdcardFilled, StarFilled } from '@ant-design/icons';
 const AdminDashboard: React.FC = () => {
   const { user, logout } = useUser();
 
@@ -16,17 +17,21 @@ const AdminDashboard: React.FC = () => {
       <h1>Админ-панель</h1>
       <p>Добро пожаловать, {user.email}</p>
 
-      <div style={{ display: 'flex', gap: '20px' }}>
+      <div className={s.navigation}>
         <Link to="/">
-          <Button type="primary">Вернуться на Главную</Button>
+          <Button
+            icon={<ArrowLeftOutlined />}
+            type="primary"
+          >
+            Вернуться назад
+          </Button>
         </Link>
-
         <Link to="/admin">
-          <Button type="primary">Управление музыкальными направлениями</Button>
+          <Button icon={<StarFilled />} type="primary">Управление музыкальными направлениями</Button>
         </Link>
 
         <Link to="/admin/subscription-card">
-          <Button type="primary">Управление абонементами</Button>
+          <Button icon={<IdcardFilled />} type="primary">Управление абонементами</Button>
         </Link>
       </div>
       <Outlet />

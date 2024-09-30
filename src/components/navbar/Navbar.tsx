@@ -5,6 +5,7 @@ import {
   StarFilled,
   IdcardFilled,
   MailOutlined,
+  UnlockOutlined,
 } from '@ant-design/icons';
 import { Avatar, Menu, MenuProps } from 'antd';
 import { useUser } from '../../services/store/UserContext';
@@ -58,6 +59,7 @@ const Navbar: FC = memo(() => {
     user?.isAdmin && {
       label: <Link to="/admin">Админка</Link>,
       key: 'admin',
+      icon: <UnlockOutlined />,
     },
     user
       ? {

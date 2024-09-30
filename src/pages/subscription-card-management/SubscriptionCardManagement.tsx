@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, List, Input, Form } from 'antd';
 import { useStores } from '../../services/root-store-context';
+import { PlusOutlined } from '@ant-design/icons';
 
 const SubscriptionCardManagement: React.FC = observer(() => {
   const { subscriptionStore } = useStores();
@@ -18,7 +19,7 @@ const SubscriptionCardManagement: React.FC = observer(() => {
   };
 
   return (
-    <div>
+    <div className="flex-direction-column">
       <h2>Управление абонементами</h2>
 
       <Form
@@ -53,29 +54,31 @@ const SubscriptionCardManagement: React.FC = observer(() => {
         <Button
           type="primary"
           htmlType="submit"
+          icon={<PlusOutlined />}
         >
           Добавить направление
         </Button>
       </Form>
-
-      <List
-        bordered
-        dataSource={subscriptionStore.subscriptions}
-        renderItem={item => (
-          <List.Item
-            actions={[
-              <Button
-                onClick={() => subscriptionStore.deleteSubscription(item.id)}
-                danger
-              >
-                Удалить
-              </Button>,
-            ]}
-          >
-            {item.title}: {item.price}
-          </List.Item>
-        )}
-      />
+      <div className="backgrountCard">
+        <List
+          bordered
+          dataSource={subscriptionStore.subscriptions}
+          renderItem={item => (
+            <List.Item
+              actions={[
+                <Button
+                  onClick={() => subscriptionStore.deleteSubscription(item.id)}
+                  danger
+                >
+                  Удалить
+                </Button>,
+              ]}
+            >
+              {item.title}: {item.price}
+            </List.Item>
+          )}
+        />
+      </div>
     </div>
   );
 });
