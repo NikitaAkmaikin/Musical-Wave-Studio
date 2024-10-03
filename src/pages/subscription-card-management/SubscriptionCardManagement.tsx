@@ -9,7 +9,6 @@ const SubscriptionCardManagement: React.FC = observer(() => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    // Загружаем абонементы при монтировании компонента
     subscriptionStore.fetchSubscriptions();
   }, [subscriptionStore]);
 

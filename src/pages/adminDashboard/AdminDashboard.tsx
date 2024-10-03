@@ -7,13 +7,12 @@ import { ArrowLeftOutlined, IdcardFilled, StarFilled } from '@ant-design/icons';
 const AdminDashboard: React.FC = () => {
   const { user, logout } = useUser();
 
-  // Проверяем, что пользователь является администратором
   if (!user || !user.isAdmin) {
     return <p>У вас нет прав доступа к этой странице</p>;
   }
 
   return (
-    <div>
+    <div className='container'>
       <h1>Админ-панель</h1>
       <p>Добро пожаловать, {user.email}</p>
 

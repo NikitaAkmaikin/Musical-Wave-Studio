@@ -1,8 +1,6 @@
-// NotFound404.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import s from './NotFound404.module.scss'; // подключаем CSS для стилизации
-
+import s from './NotFound404.module.scss';
 export const NotFound404: React.FC = () => {
   return (
     <div

@@ -1,14 +1,14 @@
 import { FC, memo } from 'react';
 import { Card } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import s from './MusicCard.module.scss';  // Подключаем стили
+import s from './MusicCard.module.scss';
 
 interface MusicCardProps {
   id: number;
   title: string;
   image: string;
   description: string;
-  isModal?: boolean;  // Новый пропс для определения модального режима
+  isModal?: boolean;
 }
 
 const MusicCard: FC<MusicCardProps> = memo(
@@ -31,14 +31,14 @@ const MusicCard: FC<MusicCardProps> = memo(
 
     return (
       <Card
-        hoverable={!isModal}  // Убираем hover эффект, если карточка в модальном окне
-        className={s.card}  // Добавляем класс для стилизации
+        hoverable={!isModal}
+        className={s.card}
         cover={
           <div className={s.imageContainer}>
             <img
               alt={title}
               src={imageUrl}
-              className={s.image}  // Используем классы для стилизации
+              className={s.image}
             />
           </div>
         }

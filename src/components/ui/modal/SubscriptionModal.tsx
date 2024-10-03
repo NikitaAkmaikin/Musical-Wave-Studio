@@ -19,6 +19,7 @@ const SubscriptionModal: FC = observer(() => {
       footer={null}
     >
       <p>{subscriptionStore.selectedSubscription?.description}</p>
+      <p>{subscriptionStore.selectedSubscription?.details}</p>
       <Link to="/contact">
         <Button type="primary">Связаться с нами</Button>
       </Link>

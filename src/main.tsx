@@ -1,7 +1,7 @@
 import './index.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { spy } from 'mobx';
+// import { spy } from 'mobx';
 
 import Routes from './routes';
 

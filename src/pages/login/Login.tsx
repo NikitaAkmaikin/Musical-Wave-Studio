@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUser } from '../../services/store/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
-import s from './Login.module.scss'; // Подключаем стили
+import s from './Login.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const Login: React.FC = () => {

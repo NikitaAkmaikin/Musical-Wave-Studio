@@ -1,10 +1,90 @@
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  padding: 10px;
-  max-width: 1200px;
-  flex-grow: 1;
-  gap: 30px;
+.heroSection {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #f0f2f5;
+  background-image: url(../../stories/assets/drums.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // background-attachment: fixed;  /* фиксируем фон */
+  
+  @media (max-width: 768px) {
+    padding: 60px 10px;
+  }
+
+  .title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+
+  .subtitle {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  .heroButton {
+    padding: 12px 40px;
+    font-size: 18px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      padding: 10px 30px;
+    }
+  }
 }
+
+.directionsSection {
+  padding: 30px 20px;
+  background-color: white;
+  color: #000;
+
+  .directionsTitle {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+
+    @media (max-width: 768px) {
+      font-size: 26px;
+    }
+  }
+
+  .directionsDescription {
+    text-align: center;
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  .directionsList {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+

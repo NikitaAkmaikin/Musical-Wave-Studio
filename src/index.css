@@ -37,6 +37,8 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
+  margin-top: 0;
 }
 
 button {
@@ -101,12 +103,6 @@ button:focus-visible {
   background: rgba(66, 97, 225, 0.393);
 }
 
-@media (max-width: 560px) {
-  h1 {
-    font-size: 2.2em;
-    line-height: 1.1;
-  }
-}
 
 .backgrountCard {
   background-color: #fff;
@@ -116,4 +112,33 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.flex-direction-column-center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 60px;
+  margin: 0 auto;
+}
+
+.text-aling {
+  text-align: center;
+}
+
+@media (max-width: 580px) {
+  h1 {
+    font-size: 2.2em;
+    line-height: 1.1;
+  }
+
+  .container {
+    padding: 20px;
+  }
 }

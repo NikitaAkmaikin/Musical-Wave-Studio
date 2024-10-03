@@ -6,26 +6,23 @@ import { useUser } from '../../services/store/UserContext';
 const ContactForm: FC = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useUser(); // Данные пользователя, если он залогинен
+  const { user } = useUser();
 
   const onFinish = async (values: any) => {
     setIsLoading(true);
 
     try {
-      // Отправляем данные формы на сервер
       const response = await axios.post(
-        'http://localhost:5000/api/contact', // Убедись, что маршрут на бэкенде корректен
+        'http://localhost:5000/api/contact',
         values
       );
       console.log('Ответ сервера:', response.data);
 
-      // Показываем уведомление об успешной отправке
       notification.success({
         message: 'Сообщение отправлено',
         description: 'Ваше сообщение успешно отправлено!',
       });
 
-      // Очищаем форму после успешной отправки
       form.resetFields();
     } catch (error) {
       console.error('Ошибка при отправке формы:', error);
@@ -42,8 +39,8 @@ const ContactForm: FC = () => {
     <Form
       form={form}
       onFinish={onFinish}
-      layout="vertical" // Вертикальная верстка формы
-      style={{ maxWidth: '600px', margin: '0 auto' }} // Центрируем форму
+      layout="vertical"
+      style={{ maxWidth: '600px', margin: '0 auto' }}
     >
       <Form.Item
         name="name"
@@ -61,7 +58,7 @@ const ContactForm: FC = () => {
         ]}
       >
         <Input
-          placeholder={user?.email || 'Введите ваш email'} // Если пользователь залогинен, его email подтянется автоматически
+          placeholder={user?.email || 'Введите ваш email'}
         />
       </Form.Item>
 
@@ -89,7 +86,7 @@ const ContactForm: FC = () => {
           type="primary"
           htmlType="submit"
           loading={isLoading}
-          block // Кнопка будет занимать всю ширину
+          block
         >
           Отправить
         </Button>

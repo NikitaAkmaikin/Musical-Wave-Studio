@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
-import s from './Register.module.scss'; // Подключаем стили
+import s from './Register.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const Register: React.FC = () => {
@@ -13,14 +13,12 @@ const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Отправляем запрос на сервер для регистрации
       const response = await axios.post(
         'http://localhost:5000/api/auth/register',
         values
       );
       notification.success({ message: 'Успешная регистрация' });
 
-      // Сохраняем токен и перенаправляем пользователя на главную страницу
       const { token } = response.data;
       localStorage.setItem('token', token);
       navigate('/');

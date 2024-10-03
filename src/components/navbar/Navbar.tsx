@@ -70,7 +70,7 @@ const Navbar: FC = memo(() => {
           label: <Link to="/login">Войти</Link>,
           key: 'login',
         },
-  ].filter((item): item is MenuItem => !!item); // Удаляем falsy значения
+  ].filter((item): item is MenuItem => !!item);
 
   return (
     <Menu

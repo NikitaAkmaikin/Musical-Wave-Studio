@@ -17,7 +17,7 @@ const MusicModal: FC = observer(() => {
       open={musicStore.isModalVisible}
       onCancel={handleClose}
       footer={null}
-      width={600}  // Увеличим ширину для большего контента
+      width={600}
     >
       {musicStore.selectedDirection && (
         <MusicCard 
@@ -25,7 +25,7 @@ const MusicModal: FC = observer(() => {
           title={musicStore.selectedDirection.title}
           description={musicStore.selectedDirection.description}
           image={musicStore.selectedDirection.image}
-          isModal={true}  // Передаем флаг для модального отображения
+          isModal={true}
         />
       )}
       <Link to="/contact">

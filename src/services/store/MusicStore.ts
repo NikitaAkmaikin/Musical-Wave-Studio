@@ -19,20 +19,15 @@ class MusicStore {
   constructor() {
     makeAutoObservable(this);
   }
-
-  // Открытие модального окна
   openModal(direction: MusicDirection) {
     this.selectedDirection = direction;
     this.isModalVisible = true;
   }
-
-  // Закрытие модального окна
   closeModal() {
     this.selectedDirection = null;
     this.isModalVisible = false;
   }
 
-  // Получение всех музыкальных направлений с сервера
   async fetchDirections() {
     this.isLoading = true;
     this.error = null;
@@ -51,7 +46,6 @@ class MusicStore {
     }
   }
 
-  // Метод для добавления нового музыкального направления (изменённый для работы с FormData)
   async addMusic(newDirection: FormData) {
     this.isLoading = true;
     this.error = null;
@@ -59,11 +53,11 @@ class MusicStore {
     try {
       const response = await axios.post('http://localhost:5000/api/music-directions', newDirection, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Устанавливаем заголовок для отправки файлов
+          'Content-Type': 'multipart/form-data',
         },
       });
       runInAction(() => {
-        this.directions.push(response.data);  // Добавляем новое направление
+        this.directions.push(response.data);
       });
     } catch (error) {
       this.error = 'Ошибка при добавлении музыкального направления';
@@ -74,8 +68,6 @@ class MusicStore {
     }
   }
   
-  
-  // Удаление музыкального направления
   async deleteMusic(id: number) {
     this.isLoading = true;
     this.error = null;

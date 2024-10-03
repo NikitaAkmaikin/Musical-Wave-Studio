@@ -7,16 +7,15 @@ import { PlusOutlined } from '@ant-design/icons';
 const MusicCardManagement: React.FC = observer(() => {
   const { musicStore } = useStores();
   const [form] = Form.useForm();
-  const [file, setFile] = useState<File | null>(null); // Состояние для выбранного файла
+  const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
     musicStore.fetchDirections();
   }, [musicStore]);
 
-  // Обработка выбора файла
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]); // Сохраняем первый выбранный файл
+      setFile(e.target.files[0]);
     }
   };
 
@@ -27,17 +26,16 @@ const MusicCardManagement: React.FC = observer(() => {
     formData.append('details', values.details);
     
     if (file) {
-      formData.append('image', file); // Добавляем выбранный файл в FormData
+      formData.append('image', file);
     }
 
-    // Логируем отправляемые данные
     for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
 
-    musicStore.addMusic(formData); // Отправляем данные как FormData
+    musicStore.addMusic(formData);
     form.resetFields();
-    setFile(null); // Очищаем состояние после отправки
+    setFile(null);
   };
 
   return (
@@ -55,7 +53,6 @@ const MusicCardManagement: React.FC = observer(() => {
           <Input placeholder="Подробная информация" />
         </Form.Item>
         <Form.Item>
-          {/* Собственная реализация загрузки файла */}
           <input type="file" onChange={handleFileChange} accept="image/*" />
         </Form.Item>
         <Form.Item>
@@ -77,7 +74,6 @@ const MusicCardManagement: React.FC = observer(() => {
                 </Button>,
               ]}
             >
-              {/* Выводим изображение и данные о направлении */}
               <img
                 src={`http://localhost:5000/api/music-directions/image/${item.image}`}
                 alt={item.title}
