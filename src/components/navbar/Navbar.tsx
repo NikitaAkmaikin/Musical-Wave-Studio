@@ -7,16 +7,18 @@ import {
   MailOutlined,
   UnlockOutlined,
 } from '@ant-design/icons';
-import { Avatar, Menu, MenuProps } from 'antd';
+import { Avatar, Menu } from 'antd';
+import type { MenuProps } from 'antd';
 import { useUser } from '../../services/store/UserContext';
 
-type MenuItem = Exclude<MenuProps['items'][number], false | undefined | null>;
+// Определяем тип для элементов меню
+type MenuItem = Required<MenuProps>['items'][number];
 
 const Navbar: FC = memo(() => {
   const { user, logout } = useUser();
   const url = 'https://i.postimg.cc/pT4bD8gV/musical-Wave-1.png';
 
-  const items: MenuItem[] = [
+  const items: (MenuItem | undefined)[] = [
     {
       label: (
         <NavLink to="/">
@@ -52,15 +54,13 @@ const Navbar: FC = memo(() => {
       key: 'contact',
       icon: <MailOutlined />,
     },
-    // user && {
-    //   label: `Привет, ${user.email}!`,
-    //   key: 'greeting',
-    // },
-    user?.isAdmin && {
-      label: <Link to="/admin">Админка</Link>,
-      key: 'admin',
-      icon: <UnlockOutlined />,
-    },
+    user?.isAdmin
+      ? {
+          label: <Link to="/admin">Админка</Link>,
+          key: 'admin',
+          icon: <UnlockOutlined />,
+        }
+      : undefined, // Если условие не выполнено, добавляем undefined
     user
       ? {
           label: <span onClick={logout}>Выйти</span>,
@@ -70,12 +70,15 @@ const Navbar: FC = memo(() => {
           label: <Link to="/login">Войти</Link>,
           key: 'login',
         },
-  ].filter((item): item is MenuItem => !!item);
+  ];
+
+  // Фильтруем undefined элементы
+  const filteredItems: MenuItem[] = items.filter((item): item is MenuItem => item !== undefined);
 
   return (
     <Menu
       mode="horizontal"
-      items={items}
+      items={filteredItems}
       style={{ display: 'flex', justifyContent: 'center' }}
     />
   );

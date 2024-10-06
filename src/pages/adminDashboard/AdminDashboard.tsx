@@ -5,7 +5,7 @@ import { useUser } from '../../services/store/UserContext';
 import s from './AdminDashboard.module.scss';
 import { ArrowLeftOutlined, IdcardFilled, StarFilled } from '@ant-design/icons';
 const AdminDashboard: React.FC = () => {
-  const { user, logout } = useUser();
+  const { user } = useUser();
 
   if (!user || !user.isAdmin) {
     return <p>У вас нет прав доступа к этой странице</p>;
