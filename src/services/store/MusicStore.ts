@@ -33,7 +33,7 @@ class MusicStore {
     this.error = null;
 
     try {
-      const response = await axios.get('http://localhost:5000/api/music-directions');
+      const response = await axios.get('/api/music-directions');
       runInAction(() => {
         this.directions = response.data;
       });
@@ -51,7 +51,7 @@ class MusicStore {
     this.error = null;
   
     try {
-      const response = await axios.post('http://localhost:5000/api/music-directions', newDirection, {
+      const response = await axios.post('/api/music-directions', newDirection, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -73,7 +73,7 @@ class MusicStore {
     this.error = null;
 
     try {
-      await axios.delete(`http://localhost:5000/api/music-directions/${id}`);
+      await axios.delete(`/api/music-directions/${id}`);
       runInAction(() => {
         this.directions = this.directions.filter(direction => direction.id !== id);
       });

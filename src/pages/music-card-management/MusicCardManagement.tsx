@@ -75,7 +75,7 @@ const MusicCardManagement: React.FC = observer(() => {
               ]}
             >
               <img
-                src={`http://localhost:5000/api/music-directions/image/${item.image}`}
+                src={`/api/music-directions/image/${item.image}`}
                 alt={item.title}
                 style={{ width: '100px', height: '100px', objectFit: 'cover' }}
               />

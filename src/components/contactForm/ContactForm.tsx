@@ -13,7 +13,7 @@ const ContactForm: FC = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/contact',
+        '/api/contact',
         values
       );
       console.log('Ответ сервера:', response.data);

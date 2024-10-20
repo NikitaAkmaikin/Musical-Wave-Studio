@@ -28,7 +28,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('http://localhost:5000/api/auth/login', {
+    const response = await axios.post('/api/auth/login', {
       email,
       password,
     });

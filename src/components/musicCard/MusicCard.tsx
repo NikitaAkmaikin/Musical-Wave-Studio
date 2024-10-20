@@ -27,7 +27,7 @@ const MusicCard: FC<MusicCardProps> = memo(
       }
     };
 
-    const imageUrl = `http://localhost:5000/uploads/${image}`;
+    const imageUrl = `/uploads/${image}`;
 
     return (
       <Card

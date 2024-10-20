@@ -36,7 +36,7 @@ class SubscriptionStore {
 
     try {
       const response = await axios.get(
-        'http://localhost:5000/api/subscriptions'
+        '/api/subscriptions'
       );
       runInAction(() => {
         this.subscriptions = response.data;
@@ -56,7 +56,7 @@ class SubscriptionStore {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/subscriptions',
+        '/api/subscriptions',
         newSubscription
       );
       this.subscriptions.push(response.data);
@@ -73,7 +73,7 @@ class SubscriptionStore {
     this.error = null;
 
     try {
-      await axios.delete(`http://localhost:5000/api/subscriptions/${id}`);
+      await axios.delete(`/api/subscriptions/${id}`);
       this.subscriptions = this.subscriptions.filter(
         subscription => subscription.id !== id
       ); // Удаляем абонемент из состояния
