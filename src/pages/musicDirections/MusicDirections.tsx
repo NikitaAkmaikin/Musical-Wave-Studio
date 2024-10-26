@@ -82,7 +82,7 @@ export const MusicDirections: React.FC = observer(() => {
 
   return (
     <div className="container">
-      <h1>Музыкальные направления</h1>
+      <h1>Мероприятия</h1>
       {musicStore.directions.length <= 0 ? (
         <p>Ничего нет</p>
       ) : (

@@ -40,7 +40,7 @@ const MusicCardManagement: React.FC = observer(() => {
 
   return (
     <div className="flex-direction-column">
-      <h2>Управление музыкальными направлениями</h2>
+      <h2>Управление Мероприятиями</h2>
 
       <Form form={form} onFinish={onAddMusicCard} layout="inline">
         <Form.Item name="title" rules={[{ required: true, message: 'Введите заголовок' }]}>

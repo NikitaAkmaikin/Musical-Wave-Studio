@@ -26,11 +26,11 @@ const AdminDashboard: React.FC = () => {
           </Button>
         </Link>
         <Link to="/admin">
-          <Button icon={<StarFilled />} type="primary">Управление музыкальными направлениями</Button>
+          <Button icon={<StarFilled />} type="primary">Управление Мероприятиями</Button>
         </Link>
 
         <Link to="/admin/subscription-card">
-          <Button icon={<IdcardFilled />} type="primary">Управление абонементами</Button>
+          <Button icon={<IdcardFilled />} type="primary">Управление Абонементами</Button>
         </Link>
       </div>
       <Outlet />
