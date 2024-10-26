@@ -25,6 +25,7 @@ const MusicModal: FC = observer(() => {
           title={musicStore.selectedDirection.title}
           description={musicStore.selectedDirection.description}
           image={musicStore.selectedDirection.image}
+          details={musicStore.selectedDirection.details}
           isModal={true}
         />
       )}

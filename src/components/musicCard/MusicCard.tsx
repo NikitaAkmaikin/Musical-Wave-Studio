@@ -8,11 +8,12 @@ interface MusicCardProps {
   title: string;
   image: string;
   description: string;
+  details: string;
   isModal?: boolean;
 }
 
 const MusicCard: FC<MusicCardProps> = memo(
-  ({ id, title, description, image, isModal = false }) => {
+  ({ id, title, description, image, details, isModal = false }) => {
     const { musicStore } = useStores();
 
     const handleCardClick = () => {
@@ -22,7 +23,7 @@ const MusicCard: FC<MusicCardProps> = memo(
           title,
           description,
           image,
-          details: 'Дополнительная информация об этом направлении',
+          details,
         });
       }
     };
@@ -45,7 +46,7 @@ const MusicCard: FC<MusicCardProps> = memo(
         title={title}
         onClick={handleCardClick}
       >
-        <p>{description}</p>
+        {isModal ? <p>{details}</p> : <p>{description}</p>}
       </Card>
     );
   }
