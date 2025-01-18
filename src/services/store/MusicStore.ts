@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { dev } from '../../const/href';
 
 interface MusicDirection {
   id: number;
@@ -33,7 +34,7 @@ class MusicStore {
     this.error = null;
 
     try {
-      const response = await axios.get('/api/music-directions');
+      const response = await axios.get(`${dev}/api/music-directions`);
       runInAction(() => {
         this.directions = response.data;
       });
@@ -51,7 +52,7 @@ class MusicStore {
     this.error = null;
   
     try {
-      const response = await axios.post('/api/music-directions', newDirection, {
+      const response = await axios.post(`${dev}/api/music-directions`, newDirection, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -73,7 +74,7 @@ class MusicStore {
     this.error = null;
 
     try {
-      await axios.delete(`/api/music-directions/${id}`);
+      await axios.delete(`${dev}/api/music-directions/${id}`);
       runInAction(() => {
         this.directions = this.directions.filter(direction => direction.id !== id);
       });

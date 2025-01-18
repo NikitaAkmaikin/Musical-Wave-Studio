@@ -2,6 +2,7 @@ import { FC, memo } from 'react';
 import { Card } from 'antd';
 import { useStores } from '../../services/root-store-context';
 import s from './MusicCard.module.scss';
+import { dev } from '../../const/href';
 
 interface MusicCardProps {
   id: number;
@@ -28,7 +29,7 @@ const MusicCard: FC<MusicCardProps> = memo(
       }
     };
 
-    const imageUrl = `/uploads/${image}`;
+    const imageUrl = `${dev}/uploads/${image}`;
 
     return (
       <Card

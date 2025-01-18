@@ -4,6 +4,7 @@ import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
 import s from './Register.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { dev } from '../../const/href';
 
 const Register: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ const Register: React.FC = () => {
 
     try {
       const response = await axios.post(
-        '/api/auth/register',
+        `${dev}/api/auth/register`,
         values
       );
       notification.success({ message: 'Успешная регистрация' });

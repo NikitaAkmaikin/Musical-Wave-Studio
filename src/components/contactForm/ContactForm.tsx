@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
 import { useUser } from '../../services/store/UserContext';
+import { dev } from '../../const/href';
 
 const ContactForm: FC = () => {
   const [form] = Form.useForm();
@@ -13,7 +14,7 @@ const ContactForm: FC = () => {
 
     try {
       const response = await axios.post(
-        '/api/contact',
+        `${dev}/api/contact`,
         values
       );
       console.log('Ответ сервера:', response.data);

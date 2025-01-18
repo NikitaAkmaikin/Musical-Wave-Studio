@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { dev } from '../../const/href';
 
 interface Subscription {
   id: number;
@@ -36,7 +37,7 @@ class SubscriptionStore {
 
     try {
       const response = await axios.get(
-        '/api/subscriptions'
+        `${dev}/api/subscriptions`
       );
       runInAction(() => {
         this.subscriptions = response.data;
@@ -56,7 +57,7 @@ class SubscriptionStore {
 
     try {
       const response = await axios.post(
-        '/api/subscriptions',
+        `${dev}api/subscriptions`,
         newSubscription
       );
       this.subscriptions.push(response.data);
@@ -73,7 +74,7 @@ class SubscriptionStore {
     this.error = null;
 
     try {
-      await axios.delete(`/api/subscriptions/${id}`);
+      await axios.delete(`${dev}/api/subscriptions/${id}`);
       this.subscriptions = this.subscriptions.filter(
         subscription => subscription.id !== id
       ); // Удаляем абонемент из состояния

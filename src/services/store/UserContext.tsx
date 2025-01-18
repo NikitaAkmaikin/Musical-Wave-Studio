@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { dev } from '../../const/href';
 
 interface User {
   email: string;
@@ -28,7 +29,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('/api/auth/login', {
+    const response = await axios.post(`${dev}/api/auth/login`, {
       email,
       password,
     });

@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, List, Input, Form } from 'antd';
 import { useStores } from '../../services/root-store-context';
 import { PlusOutlined } from '@ant-design/icons';
+import { dev } from '../../const/href';
 
 const MusicCardManagement: React.FC = observer(() => {
   const { musicStore } = useStores();
@@ -75,7 +76,7 @@ const MusicCardManagement: React.FC = observer(() => {
               ]}
             >
               <img
-                src={`/api/music-directions/image/${item.image}`}
+                src={`${dev}/api/music-directions/image/${item.image}`}
                 alt={item.title}
                 style={{ width: '100px', height: '100px', objectFit: 'cover' }}
               />
