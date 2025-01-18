@@ -1,25 +1,29 @@
 import axios from 'axios';
 import { dev } from '../const/href';
 
-interface ContactFormValues {
+export interface ContactFormValues {
   name: string;
   email: string;
   phone: string;
   message: string;
 }
 
-interface MusicCardData {
+export interface MusicCardData {
   title: string;
   description: string;
   details: string;
   image?: File;
 }
 
-interface SubscriptionData {
+export interface SubscriptionData {
   title: string;
   description: string;
   price: string;
   details: string;
+}
+export interface RegisterData{
+  email: string;
+  password: string;
 }
 
 // Функция для отправки данных контактной формы
@@ -27,8 +31,8 @@ export const sendContactForm = async (values: ContactFormValues) => {
   try {
     const response = await axios.post(`${dev}/api/contact`, values);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Ошибка отправки формы');
+  } catch {
+    throw new Error('Ошибка отправки формы');
   }
 };
 
@@ -39,8 +43,8 @@ export const register = async (values: { email: string; password: string }) => {
   try {
     const response = await axios.post(`${dev}/api/auth/register`, values);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Ошибка при регистрации');
+  } catch {
+    throw new Error('Ошибка при регистрации');
   }
 };
 

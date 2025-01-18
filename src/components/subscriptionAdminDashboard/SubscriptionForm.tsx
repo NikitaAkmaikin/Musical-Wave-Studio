@@ -1,16 +1,17 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { SubscriptionData } from '../../services/api';
 
 interface SubscriptionFormProps {
-  onSubmit: (values: any) => void;
+  onSubmit: (values: SubscriptionData) => void;
   loading: boolean;
 }
 
 const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSubmit, loading }) => {
   const [form] = Form.useForm();
 
-  const handleFinish = (values: any) => {
+  const handleFinish = (values: SubscriptionData) => {
     onSubmit(values);
     form.resetFields();
   };

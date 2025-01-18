@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { MusicCardData } from '../../services/api';
 
 interface MusicCardFormProps {
-  onSubmit: (values: any, file: File | null) => void;
+  onSubmit: (values: MusicCardData, file: File | null) => void;
   loading: boolean;
 }
 
@@ -17,7 +18,7 @@ const MusicCardForm: React.FC<MusicCardFormProps> = ({ onSubmit, loading }) => {
     }
   };
 
-  const handleFinish = (values: any) => {
+  const handleFinish = (values: MusicCardData) => {
     onSubmit(values, file);
     form.resetFields();
     setFile(null);

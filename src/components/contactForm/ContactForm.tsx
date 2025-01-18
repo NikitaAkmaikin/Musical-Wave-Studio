@@ -1,14 +1,14 @@
 import { FC, useState } from 'react'; 
 import { Form, Input, Button, notification, message } from 'antd';
 import { useUser } from '../../services/store/UserContext';
-import { sendContactForm } from '../../services/api';
+import { ContactFormValues, sendContactForm } from '../../services/api';
 
 const ContactForm: FC = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser();
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: ContactFormValues) => {
     setIsLoading(true);
 
     try {
@@ -20,11 +20,11 @@ const ContactForm: FC = () => {
       });
 
       form.resetFields(); // Очистка формы
-    } catch (error: any) {
-      console.error('Ошибка при отправке формы:', error.message);
+    } catch {
+      console.error('Ошибка при отправке формы:');
       notification.error({
         message: 'Ошибка',
-        description: error.message || 'Не удалось отправить сообщение. Попробуйте позже.',
+        description: 'Не удалось отправить сообщение. Попробуйте позже.',
       });
     } finally {
       setIsLoading(false);

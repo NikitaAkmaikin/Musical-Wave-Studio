@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import { fetchSubscriptions, addSubscription, deleteSubscription } from '../../services/api';
+import { fetchSubscriptions, addSubscription, deleteSubscription, SubscriptionData } from '../../services/api';
 import SubscriptionForm from '../../components/subscriptionAdminDashboard/SubscriptionForm';
 import SubscriptionList from '../../components/subscriptionAdminDashboard/SubscriptionList';
 
@@ -31,17 +31,17 @@ const SubscriptionCardManagement: React.FC = observer(() => {
     loadSubscriptions();
   }, [subscriptionStore]);
 
-  const handleAddSubscription = async (values: any) => {
+  const handleAddSubscription = async (values: SubscriptionData) => {
     setActionLoading(true);
     try {
       const newSubscription = await addSubscription(values);
       subscriptionStore.addSubscription(newSubscription); // Локально обновляем store
       notification.success({ message: 'Абонемент добавлен успешно!' });
-    } catch (error: any) {
-      console.error('Ошибка добавления:', error);
+    } catch {
+      console.error('Ошибка добавления:');
       notification.error({
         message: 'Ошибка добавления',
-        description: error.response?.data?.message || 'Попробуйте снова.',
+        description: 'Попробуйте снова.',
       });
     } finally {
       setActionLoading(false);
@@ -54,11 +54,11 @@ const SubscriptionCardManagement: React.FC = observer(() => {
       await deleteSubscription(id);
       subscriptionStore.removeSubscription(id); // Локально обновляем store
       notification.success({ message: 'Абонемент удалён успешно!' });
-    } catch (error: any) {
-      console.error('Ошибка удаления:', error);
+    } catch {
+      console.error('Ошибка удаления:');
       notification.error({
         message: 'Ошибка удаления',
-        description: error.response?.data?.message || 'Попробуйте снова.',
+        description: 'Попробуйте снова.',
       });
     } finally {
       setActionLoading(false);

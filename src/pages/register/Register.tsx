@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
 import s from './Register.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { register } from '../../services/api';
+import { register, RegisterData } from '../../services/api';
 
 
 const Register: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: RegisterData) => {
     setIsLoading(true);
 
     try {
@@ -20,11 +20,11 @@ const Register: React.FC = () => {
       const { token } = data;
       localStorage.setItem('token', token);
       navigate('/');
-    } catch (error: any) {
-      console.error('Ошибка при регистрации:', error.message);
+    } catch {
+      console.error('Ошибка при регистрации:');
       notification.error({
         message: 'Ошибка',
-        description: error.message || 'Ошибка при регистрации',
+        description:'Ошибка при регистрации',
       });
     } finally {
       setIsLoading(false);

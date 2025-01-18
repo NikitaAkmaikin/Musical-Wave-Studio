@@ -38,7 +38,7 @@ class MusicStore {
       runInAction(() => {
         this.directions = response.data;
       });
-    } catch (error) {
+    } catch {
       this.error = 'Ошибка при загрузке музыкальных направлений';
     } finally {
       runInAction(() => {
@@ -60,7 +60,7 @@ class MusicStore {
       runInAction(() => {
         this.directions.push(response.data);
       });
-    } catch (error) {
+    } catch {
       this.error = 'Ошибка при добавлении музыкального направления';
     } finally {
       runInAction(() => {
@@ -78,7 +78,7 @@ class MusicStore {
       runInAction(() => {
         this.directions = this.directions.filter(direction => direction.id !== id);
       });
-    } catch (error) {
+    } catch {
       this.error = 'Ошибка при удалении музыкального направления';
     } finally {
       this.isLoading = false;

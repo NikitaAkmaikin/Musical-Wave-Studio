@@ -14,9 +14,20 @@ class SubscriptionStore {
   subscriptions: Subscription[] = [];
   isLoading = false;
   error: string | null = null;
+  selectedSubscription: Subscription | null = null;
+  isModalVisible = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  openModal(subscription: Subscription) {
+    this.selectedSubscription = subscription;
+    this.isModalVisible = true;
+  }
+  closeModal() {
+    this.selectedSubscription = null;
+    this.isModalVisible = false;
   }
 
   // Установка списка абонементов
