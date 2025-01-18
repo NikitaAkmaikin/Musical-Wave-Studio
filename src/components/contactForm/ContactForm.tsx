@@ -1,8 +1,7 @@
 import { FC, useState } from 'react'; 
-import { Form, Input, Button, notification } from 'antd';
-import axios from 'axios';
+import { Form, Input, Button, notification, message } from 'antd';
 import { useUser } from '../../services/store/UserContext';
-import { dev } from '../../const/href';
+import { sendContactForm } from '../../services/api';
 
 const ContactForm: FC = () => {
   const [form] = Form.useForm();
@@ -13,23 +12,19 @@ const ContactForm: FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        `${dev}/api/contact`,
-        values
-      );
-      console.log('Ответ сервера:', response.data);
-
+      await sendContactForm(values); // Вызов вынесенной функции
+      message.success('Сообщение отправлено')
       notification.success({
         message: 'Сообщение отправлено',
         description: 'Ваше сообщение успешно отправлено!',
       });
 
-      form.resetFields();
-    } catch (error) {
-      console.error('Ошибка при отправке формы:', error);
+      form.resetFields(); // Очистка формы
+    } catch (error: any) {
+      console.error('Ошибка при отправке формы:', error.message);
       notification.error({
         message: 'Ошибка',
-        description: 'Не удалось отправить сообщение. Попробуйте позже.',
+        description: error.message || 'Не удалось отправить сообщение. Попробуйте позже.',
       });
     } finally {
       setIsLoading(false);

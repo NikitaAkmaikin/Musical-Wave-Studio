@@ -1,82 +1,84 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, List, Input, Form } from 'antd';
+import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import { PlusOutlined } from '@ant-design/icons';
+import { fetchSubscriptions, addSubscription, deleteSubscription } from '../../services/api';
+import SubscriptionForm from '../../components/subscriptionAdminDashboard/SubscriptionForm';
+import SubscriptionList from '../../components/subscriptionAdminDashboard/SubscriptionList';
 
 const SubscriptionCardManagement: React.FC = observer(() => {
   const { subscriptionStore } = useStores();
-  const [form] = Form.useForm();
+  const [listLoading, setListLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(false);
 
   useEffect(() => {
-    subscriptionStore.fetchSubscriptions();
+    const loadSubscriptions = async () => {
+      setListLoading(true);
+      try {
+        const subscriptions = await fetchSubscriptions();
+        subscriptionStore.setSubscriptions(subscriptions); // Предполагаем, что у store есть метод setSubscriptions
+      } catch (error) {
+        console.error('Ошибка загрузки:', error);
+        notification.error({
+          message: 'Ошибка загрузки',
+          description: 'Не удалось загрузить список абонементов.',
+        });
+      } finally {
+        setListLoading(false);
+      }
+    };
+
+    loadSubscriptions();
   }, [subscriptionStore]);
 
-  const onAddSubscription = (values: any) => {
-    subscriptionStore.addSubscription(values);
-    form.resetFields();
+  const handleAddSubscription = async (values: any) => {
+    setActionLoading(true);
+    try {
+      const newSubscription = await addSubscription(values);
+      subscriptionStore.addSubscription(newSubscription); // Локально обновляем store
+      notification.success({ message: 'Абонемент добавлен успешно!' });
+    } catch (error: any) {
+      console.error('Ошибка добавления:', error);
+      notification.error({
+        message: 'Ошибка добавления',
+        description: error.response?.data?.message || 'Попробуйте снова.',
+      });
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDeleteSubscription = async (id: number) => {
+    setActionLoading(true);
+    try {
+      await deleteSubscription(id);
+      subscriptionStore.removeSubscription(id); // Локально обновляем store
+      notification.success({ message: 'Абонемент удалён успешно!' });
+    } catch (error: any) {
+      console.error('Ошибка удаления:', error);
+      notification.error({
+        message: 'Ошибка удаления',
+        description: error.response?.data?.message || 'Попробуйте снова.',
+      });
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   return (
     <div className="flex-direction-column">
       <h2>Управление абонементами</h2>
-
-      <Form
-        form={form}
-        onFinish={onAddSubscription}
-        layout="inline"
-      >
-        <Form.Item
-          name="title"
-          rules={[{ required: true, message: 'Введите заголовок' }]}
-        >
-          <Input placeholder="Название" />
-        </Form.Item>
-        <Form.Item
-          name="description"
-          rules={[{ required: true, message: 'Введите описание' }]}
-        >
-          <Input placeholder="Описание" />
-        </Form.Item>
-        <Form.Item
-          name="price"
-          rules={[{ required: true, message: 'Введите цену' }]}
-        >
-          <Input placeholder="Цена" />
-        </Form.Item>
-        <Form.Item
-          name="details"
-          rules={[{ required: true, message: 'Подробная информация' }]}
-        >
-          <Input placeholder="Подробная информация" />
-        </Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          icon={<PlusOutlined />}
-        >
-          Добавить направление
-        </Button>
-      </Form>
-      <div className="backgrountCard">
-        <List
-          bordered
-          dataSource={subscriptionStore.subscriptions}
-          renderItem={item => (
-            <List.Item
-              actions={[
-                <Button
-                  onClick={() => subscriptionStore.deleteSubscription(item.id)}
-                  danger
-                >
-                  Удалить
-                </Button>,
-              ]}
-            >
-              {item.title}: {item.price}
-            </List.Item>
-          )}
-        />
+      <SubscriptionForm onSubmit={handleAddSubscription} loading={actionLoading} />
+      <div className="backgroundCard" style={{ marginTop: '20px' }}>
+        {listLoading ? (
+          <Spin />
+        ) : (
+          <SubscriptionList
+            items={subscriptionStore.subscriptions}
+            onDelete={handleDeleteSubscription}
+            loading={actionLoading}
+          />
+        )}
       </div>
     </div>
   );

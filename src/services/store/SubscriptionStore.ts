@@ -12,8 +12,6 @@ interface Subscription {
 
 class SubscriptionStore {
   subscriptions: Subscription[] = [];
-  selectedSubscription: Subscription | null = null;
-  isModalVisible = false;
   isLoading = false;
   error: string | null = null;
 
@@ -21,29 +19,36 @@ class SubscriptionStore {
     makeAutoObservable(this);
   }
 
-  openModal(subscription: Subscription) {
-    this.selectedSubscription = subscription;
-    this.isModalVisible = true;
+  // Установка списка абонементов
+  setSubscriptions(subscriptions: Subscription[]) {
+    this.subscriptions = subscriptions;
   }
 
-  closeModal() {
-    this.selectedSubscription = null;
-    this.isModalVisible = false;
+  // Добавление нового абонемента
+  addSubscription(newSubscription: Subscription) {
+    this.subscriptions.push(newSubscription);
   }
 
+  // Удаление абонемента по ID
+  removeSubscription(id: number) {
+    this.subscriptions = this.subscriptions.filter((sub) => sub.id !== id);
+  }
+
+  // Получение списка абонементов
   async fetchSubscriptions() {
     this.isLoading = true;
     this.error = null;
 
     try {
-      const response = await axios.get(
-        `${dev}/api/subscriptions`
-      );
+      const response = await axios.get(`${dev}/api/subscriptions`);
       runInAction(() => {
         this.subscriptions = response.data;
       });
     } catch (error) {
-      this.error = 'Не удалось загрузить абонементы';
+      runInAction(() => {
+        this.error = 'Не удалось загрузить абонементы';
+      });
+      console.error('Ошибка при загрузке абонементов:', error);
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -51,37 +56,47 @@ class SubscriptionStore {
     }
   }
 
-  async addSubscription(newSubscription: Omit<Subscription, 'id'>) {
+  // Добавление абонемента через API
+  async addSubscriptionToApi(newSubscription: Omit<Subscription, 'id'>) {
     this.isLoading = true;
     this.error = null;
 
     try {
-      const response = await axios.post(
-        `${dev}api/subscriptions`,
-        newSubscription
-      );
-      this.subscriptions.push(response.data);
+      const response = await axios.post(`${dev}/api/subscriptions`, newSubscription);
+      runInAction(() => {
+        this.subscriptions.push(response.data);
+      });
     } catch (error) {
-      this.error = 'Не удалось добавить абонемент';
+      runInAction(() => {
+        this.error = 'Не удалось добавить абонемент';
+      });
+      console.error('Ошибка при добавлении абонемента:', error);
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 
-  // Метод для удаления абонемента
-  async deleteSubscription(id: number) {
+  // Удаление абонемента через API
+  async deleteSubscriptionFromApi(id: number) {
     this.isLoading = true;
     this.error = null;
 
     try {
       await axios.delete(`${dev}/api/subscriptions/${id}`);
-      this.subscriptions = this.subscriptions.filter(
-        subscription => subscription.id !== id
-      ); // Удаляем абонемент из состояния
+      runInAction(() => {
+        this.subscriptions = this.subscriptions.filter((sub) => sub.id !== id);
+      });
     } catch (error) {
-      this.error = 'Ошибка при удалении абонемента';
+      runInAction(() => {
+        this.error = 'Ошибка при удалении абонемента';
+      });
+      console.error('Ошибка при удалении абонемента:', error);
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
-import axios from 'axios';
 import s from './Register.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { dev } from '../../const/href';
+import { register } from '../../services/api';
+
 
 const Register: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,20 +14,17 @@ const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        `${dev}/api/auth/register`,
-        values
-      );
+      const data = await register(values);
       notification.success({ message: 'Успешная регистрация' });
 
-      const { token } = response.data;
+      const { token } = data;
       localStorage.setItem('token', token);
       navigate('/');
-    } catch (error) {
-      console.error('Ошибка при регистрации:', error);
+    } catch (error: any) {
+      console.error('Ошибка при регистрации:', error.message);
       notification.error({
         message: 'Ошибка',
-        description: 'Ошибка при регистрации',
+        description: error.message || 'Ошибка при регистрации',
       });
     } finally {
       setIsLoading(false);
