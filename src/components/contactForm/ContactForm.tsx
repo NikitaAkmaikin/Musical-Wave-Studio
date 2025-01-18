@@ -1,27 +1,37 @@
 import { FC, useState } from 'react'; 
-import { Form, Input, Button, notification, message } from 'antd';
+import { Input, Button, notification, message } from 'antd';
+import { useForm, Controller } from 'react-hook-form';
 import { useUser } from '../../services/store/UserContext';
 import { ContactFormValues, sendContactForm } from '../../utils/api';
 
 const ContactForm: FC = () => {
-  const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser();
+  
+  // Инициализация react-hook-form
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
+    defaultValues: {
+      name: '',
+      email: user?.email || '',
+      phone: '',
+      message: '',
+    }
+  });
 
-  const onFinish = async (values: ContactFormValues) => {
+  const onSubmit = async (values: ContactFormValues) => {
     setIsLoading(true);
 
     try {
-      await sendContactForm(values); // Вызов вынесенной функции
-      message.success('Сообщение отправлено')
+      await sendContactForm(values); // Вызов функции отправки данных
+      message.success('Сообщение отправлено');
       notification.success({
         message: 'Сообщение отправлено',
         description: 'Ваше сообщение успешно отправлено!',
       });
 
-      form.resetFields(); // Очистка формы
-    } catch {
-      console.error('Ошибка при отправке формы:');
+      reset(); // Очистка формы
+    } catch (error) {
+      console.error('Ошибка при отправке формы:', error);
       notification.error({
         message: 'Ошибка',
         description: 'Не удалось отправить сообщение. Попробуйте позже.',
@@ -32,52 +42,72 @@ const ContactForm: FC = () => {
   };
 
   return (
-    <Form
-      form={form}
-      onFinish={onFinish}
-      layout="vertical"
-      style={{ maxWidth: '600px', margin: '0 auto' }}
-    >
-      <Form.Item
-        name="name"
-        label="Имя"
-        rules={[{ required: true, message: 'Введите ваше имя' }]}
-      >
-        <Input placeholder="Введите ваше имя" />
-      </Form.Item>
-
-      <Form.Item
-        name="email"
-        label="Email"
-        rules={[
-          { required: true, type: 'email', message: 'Введите корректный email' },
-        ]}
-      >
-        <Input
-          placeholder={user?.email || 'Введите ваш email'}
+    <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="name">Имя</label>
+        <Controller
+          name="name"
+          control={control}
+          rules={{ required: 'Введите ваше имя' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Введите ваше имя" />
+          )}
         />
-      </Form.Item>
+        {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+      </div>
 
-      <Form.Item
-        name="phone"
-        label="Телефон"
-        rules={[
-          { required: true, message: 'Введите ваш номер телефона' },
-          { pattern: /^\+?[78][-(]?\d{3}\)?[-]?\d{3}[-]?\d{2}[-]?\d{2}$/, message: 'Введите корректный номер телефона' },
-        ]}
-      >
-        <Input placeholder="+7 123 456-7890" />
-      </Form.Item>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="email">Email</label>
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: 'Введите корректный email',
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+              message: 'Введите корректный email'
+            }
+          }}
+          render={({ field }) => (
+            <Input {...field} placeholder={user?.email || 'Введите ваш email'} />
+          )}
+        />
+        {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+      </div>
 
-      <Form.Item
-        name="message"
-        label="Сообщение"
-        rules={[{ required: true, message: 'Введите ваше сообщение' }]}
-      >
-        <Input.TextArea placeholder="Введите ваше сообщение" rows={4} />
-      </Form.Item>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="phone">Телефон</label>
+        <Controller
+          name="phone"
+          control={control}
+          rules={{
+            required: 'Введите ваш номер телефона',
+            pattern: {
+              value: /^\+?[78][-(]?\d{3}\)?[-]?\d{3}[-]?\d{2}[-]?\d{2}$/,
+              message: 'Введите корректный номер телефона'
+            }
+          }}
+          render={({ field }) => (
+            <Input {...field} placeholder="+7 123 456-7890" />
+          )}
+        />
+        {errors.phone && <p style={{ color: 'red' }}>{errors.phone.message}</p>}
+      </div>
 
-      <Form.Item>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="message">Сообщение</label>
+        <Controller
+          name="message"
+          control={control}
+          rules={{ required: 'Введите ваше сообщение' }}
+          render={({ field }) => (
+            <Input.TextArea {...field} placeholder="Введите ваше сообщение" rows={4} />
+          )}
+        />
+        {errors.message && <p style={{ color: 'red' }}>{errors.message.message}</p>}
+      </div>
+
+      <div>
         <Button
           type="primary"
           htmlType="submit"
@@ -86,8 +116,8 @@ const ContactForm: FC = () => {
         >
           Отправить
         </Button>
-      </Form.Item>
-    </Form>
+      </div>
+    </form>
   );
 };
 

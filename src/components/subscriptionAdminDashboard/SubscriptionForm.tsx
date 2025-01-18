@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { useForm, Controller } from 'react-hook-form';
 import { SubscriptionData } from '../../utils/api';
 
 interface SubscriptionFormProps {
@@ -9,45 +10,75 @@ interface SubscriptionFormProps {
 }
 
 const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSubmit, loading }) => {
-  const [form] = Form.useForm();
+  // Инициализация react-hook-form
+  const { control, handleSubmit, reset } = useForm<SubscriptionData>();
 
-  const handleFinish = (values: SubscriptionData) => {
+  const onFormSubmit = (values: SubscriptionData) => {
     onSubmit(values);
-    form.resetFields();
+    reset(); // Сбросить форму
   };
 
   return (
-    <Form form={form} onFinish={handleFinish} layout="vertical">
-      <Form.Item
-        name="title"
-        rules={[{ required: true, message: 'Введите заголовок' }]}
-      >
-        <Input placeholder="Название" />
-      </Form.Item>
-      <Form.Item
-        name="description"
-        rules={[{ required: true, message: 'Введите описание' }]}
-      >
-        <Input placeholder="Описание" />
-      </Form.Item>
-      <Form.Item
-        name="price"
-        rules={[{ required: true, message: 'Введите цену' }]}
-      >
-        <Input placeholder="Цена" />
-      </Form.Item>
-      <Form.Item
-        name="details"
-        rules={[{ required: true, message: 'Подробная информация' }]}
-      >
-        <Input placeholder="Подробная информация" />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" icon={<PlusOutlined />} loading={loading}>
+    <form onSubmit={handleSubmit(onFormSubmit)} style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="title">Название</label>
+        <Controller
+          name="title"
+          control={control}
+          rules={{ required: 'Введите заголовок' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Название" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="description">Описание</label>
+        <Controller
+          name="description"
+          control={control}
+          rules={{ required: 'Введите описание' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Описание" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="price">Цена</label>
+        <Controller
+          name="price"
+          control={control}
+          rules={{ required: 'Введите цену' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Цена" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="details">Подробная информация</label>
+        <Controller
+          name="details"
+          control={control}
+          rules={{ required: 'Подробная информация' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Подробная информация" />
+          )}
+        />
+      </div>
+
+      <div>
+        <Button
+          type="primary"
+          htmlType="submit"
+          icon={<PlusOutlined />}
+          loading={loading}
+        >
           Добавить абонемент
         </Button>
-      </Form.Item>
-    </Form>
+      </div>
+    </form>
   );
 };
 

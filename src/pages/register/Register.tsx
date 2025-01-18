@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, notification } from 'antd';
-import s from './Register.module.scss';
+import { Input, Button, notification } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { register, RegisterData } from '../../utils/api';
+import { useForm, Controller } from 'react-hook-form';
+import s from './Register.module.scss';
+import { register } from '../../utils/api';
 
+interface RegisterFormValues {
+  email: string;
+  password: string;
+}
 
 const Register: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { control, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>();
 
-  const onFinish = async (values: RegisterData) => {
+  const onFinish = async (values: RegisterFormValues) => {
     setIsLoading(true);
 
     try {
@@ -24,7 +30,7 @@ const Register: React.FC = () => {
       console.error('Ошибка при регистрации:');
       notification.error({
         message: 'Ошибка',
-        description:'Ошибка при регистрации',
+        description: 'Ошибка при регистрации',
       });
     } finally {
       setIsLoading(false);
@@ -33,47 +39,51 @@ const Register: React.FC = () => {
 
   return (
     <div className={s.authContainer}>
-      <Form
-        onFinish={onFinish}
-        layout="vertical"
-        className={s.authForm}
-      >
+      <form onSubmit={handleSubmit(onFinish)} className={s.authForm}style={{color: '#000'}}>
         <h2>Регистрация</h2>
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={[
-            { required: true, message: 'Введите email' },
-            { type: 'email', message: 'Введите корректный email' },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          label="Пароль"
-          rules={[{ required: true, message: 'Введите пароль' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={isLoading}
-          >
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: 'Введите email',
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                message: 'Введите корректный email',
+              },
+            }}
+            render={({ field }) => <Input {...field} placeholder="Введите email" />}
+          />
+          {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="password">Пароль</label>
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: 'Введите пароль' }}
+            render={({ field }) => <Input.Password {...field} placeholder="Введите пароль" />}
+          />
+          {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
+        </div>
+
+        <div>
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             Зарегистрироваться
           </Button>
-        </Form.Item>
-        <Link to="/login">
-          <Button
-            icon={<ArrowLeftOutlined />}
-            type="primary"
-          >
-            Вернуться назад
-          </Button>
-        </Link>
-      </Form>
+        </div>
+
+        <div>
+          <Link to="/login">
+            <Button icon={<ArrowLeftOutlined />} type="primary">
+              Вернуться назад
+            </Button>
+          </Link>
+        </div>
+      </form>
     </div>
   );
 };

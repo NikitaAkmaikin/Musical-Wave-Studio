@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { useForm, Controller } from 'react-hook-form';
 import { MusicCardData } from '../../utils/api';
 
 interface MusicCardFormProps {
@@ -9,7 +10,7 @@ interface MusicCardFormProps {
 }
 
 const MusicCardForm: React.FC<MusicCardFormProps> = ({ onSubmit, loading }) => {
-  const [form] = Form.useForm();
+  const { control, handleSubmit, reset } = useForm<MusicCardData>();
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,32 +19,66 @@ const MusicCardForm: React.FC<MusicCardFormProps> = ({ onSubmit, loading }) => {
     }
   };
 
-  const handleFinish = (values: MusicCardData) => {
+  const onFormSubmit = (values: MusicCardData) => {
     onSubmit(values, file);
-    form.resetFields();
+    reset();
     setFile(null);
   };
 
   return (
-    <Form form={form} onFinish={handleFinish} layout="vertical">
-      <Form.Item name="title" rules={[{ required: true, message: 'Введите заголовок' }]}>
-        <Input placeholder="Название" />
-      </Form.Item>
-      <Form.Item name="description" rules={[{ required: true, message: 'Введите описание' }]}>
-        <Input placeholder="Описание" />
-      </Form.Item>
-      <Form.Item name="details" rules={[{ required: true, message: 'Введите подробную информацию' }]}>
-        <Input placeholder="Подробная информация" />
-      </Form.Item>
-      <Form.Item>
+    <form onSubmit={handleSubmit(onFormSubmit)} style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="title">Название</label>
+        <Controller
+          name="title"
+          control={control}
+          rules={{ required: 'Введите заголовок' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Название" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="description">Описание</label>
+        <Controller
+          name="description"
+          control={control}
+          rules={{ required: 'Введите описание' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Описание" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="details">Подробная информация</label>
+        <Controller
+          name="details"
+          control={control}
+          rules={{ required: 'Введите подробную информацию' }}
+          render={({ field }) => (
+            <Input {...field} placeholder="Подробная информация" />
+          )}
+        />
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="file">Изображение</label>
         <input type="file" onChange={handleFileChange} accept="image/*" />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" icon={<PlusOutlined />} loading={loading}>
+      </div>
+
+      <div>
+        <Button
+          type="primary"
+          htmlType="submit"
+          icon={<PlusOutlined />}
+          loading={loading}
+        >
           Добавить направление
         </Button>
-      </Form.Item>
-    </Form>
+      </div>
+    </form>
   );
 };
 
