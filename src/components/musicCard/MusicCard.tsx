@@ -1,7 +1,6 @@
 import { FC, memo, useCallback } from 'react';
 import { Card } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import s from './MusicCard.module.scss';
 import { dev } from '../../const/href';
 
 interface MusicCardProps {
@@ -36,13 +35,15 @@ const MusicCard: FC<MusicCardProps> = memo(
     return (
       <Card
         hoverable={!isModal}
-        className={s.card}
+        className={`transform transition-transform duration-300 ${
+          !isModal ? 'hover:translate-y-[-5px] hover:shadow-lg' : ''
+        } rounded-lg border border-transparent`}
         cover={
-          <div className={s.imageContainer}>
+          <div className="relative overflow-hidden rounded-lg">
             <img
               alt={title}
               src={imageUrl}
-              className={s.image}
+              className={`w-full h-auto object-cover rounded-lg transition-opacity duration-300 ${!isModal ? 'hover:opacity-80' : ''}`}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/default-placeholder.png'; // Файл-заглушка
               }}
@@ -52,7 +53,7 @@ const MusicCard: FC<MusicCardProps> = memo(
         title={title}
         onClick={handleCardClick}
       >
-        {isModal ? <p>{details}</p> : <p>{description}</p>}
+        <p className="text-sm text-gray-700">{isModal ? details : description}</p>
       </Card>
     );
   }

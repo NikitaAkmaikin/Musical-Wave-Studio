@@ -27,11 +27,12 @@ const SubscriptionCard: FC<SubscriptionCardProps> = memo(
     return (
       <Card
         hoverable
+        className="transform transition-transform duration-300 hover:translate-y-[-5px] hover:shadow-lg rounded-lg border-transparent" 
         title={title}
         onClick={handleCardClick}
       >
-        <p>{description}</p>
-        <p>{price}</p>
+        <p className="text-sm">{description}</p>
+        <p className="text-sm">{price}</p>
       </Card>
     );
   }

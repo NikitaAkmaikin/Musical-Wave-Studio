@@ -1,3 +1,12 @@
+/* Импорт базовых стилей Tailwind */
+@tailwind base;
+
+/* Импорт компонентов Tailwind */
+@tailwind components;
+
+/* Импорт утилит Tailwind */
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
