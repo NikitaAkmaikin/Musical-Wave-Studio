@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { SubscriptionData } from '../../services/api';
+import { SubscriptionData } from '../../utils/api';
 
 interface SubscriptionFormProps {
   onSubmit: (values: SubscriptionData) => void;

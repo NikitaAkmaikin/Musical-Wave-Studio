@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { MusicCardData } from '../../services/api';
+import { MusicCardData } from '../../utils/api';
 
 interface MusicCardFormProps {
   onSubmit: (values: MusicCardData, file: File | null) => void;

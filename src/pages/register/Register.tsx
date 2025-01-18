@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
 import s from './Register.module.scss';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { register, RegisterData } from '../../services/api';
+import { register, RegisterData } from '../../utils/api';
 
 
 const Register: React.FC = () => {

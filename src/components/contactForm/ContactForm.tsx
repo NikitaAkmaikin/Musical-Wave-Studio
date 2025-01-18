@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'; 
 import { Form, Input, Button, notification, message } from 'antd';
 import { useUser } from '../../services/store/UserContext';
-import { ContactFormValues, sendContactForm } from '../../services/api';
+import { ContactFormValues, sendContactForm } from '../../utils/api';
 
 const ContactForm: FC = () => {
   const [form] = Form.useForm();

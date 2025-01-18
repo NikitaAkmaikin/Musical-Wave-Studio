@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import { fetchSubscriptions, addSubscription, deleteSubscription, SubscriptionData } from '../../services/api';
+import { fetchSubscriptions, addSubscription, deleteSubscription, SubscriptionData } from '../../utils/api';
 import SubscriptionForm from '../../components/subscriptionAdminDashboard/SubscriptionForm';
 import SubscriptionList from '../../components/subscriptionAdminDashboard/SubscriptionList';
 

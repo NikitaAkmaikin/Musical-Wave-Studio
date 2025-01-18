@@ -121,7 +121,7 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import { addMusicCard, deleteMusicCard } from '../../services/api';
+import { addMusicCard, deleteMusicCard } from '../../utils/api';
 import MusicCardForm from '../../components/musicAdminDashboard/MusicCardForm';
 import MusicCardList from '../../components/musicAdminDashboard/MusicCardList';
 import { dev } from '../../const/href';

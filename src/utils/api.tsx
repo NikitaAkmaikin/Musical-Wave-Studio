@@ -21,6 +21,7 @@ export interface SubscriptionData {
   price: string;
   details: string;
 }
+
 export interface RegisterData{
   email: string;
   password: string;
