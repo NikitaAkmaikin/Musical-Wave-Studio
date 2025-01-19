@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/admin/music-card-management',
+        path: '/admin',
         element: (
           <PrivateRoute>
             <RootStoreProvider>
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/admin/subscription-card-management',
+        path: '/admin/subscription-card',
         element: (
           <PrivateRoute>
             <RootStoreProvider>
