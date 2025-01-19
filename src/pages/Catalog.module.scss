@@ -1,0 +1,44 @@
+.directionsSection {
+  padding: 30px 20px;
+  background-color: white;
+  color: #000;
+
+  .directionsTitle {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+
+    @media (max-width: 768px) {
+      font-size: 26px;
+    }
+  }
+
+  .directionsDescription {
+    text-align: center;
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  .directionsList {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+

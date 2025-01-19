@@ -40,6 +40,11 @@ const Navbar: FC = memo(() => {
       icon: <HomeFilled />,
     },
     {
+      label: <NavLink to="/catalog">Каталог</NavLink>,
+      key: 'catalog',
+      icon: <StarFilled />,
+    },
+    {
       label: <NavLink to="/music-directions">Мероприятия</NavLink>,
       key: 'music-directions',
       icon: <StarFilled />,
