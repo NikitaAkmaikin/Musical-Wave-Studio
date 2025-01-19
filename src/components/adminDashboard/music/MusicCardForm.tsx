@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useForm, Controller } from 'react-hook-form';
-import { MusicCardData } from '../../utils/api';
+import { MusicCardData } from '../../../utils/api';
 
 interface MusicCardFormProps {
   onSubmit: (values: MusicCardData, file: File | null) => void;

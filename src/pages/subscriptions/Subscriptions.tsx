@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Row, Col, Skeleton } from 'antd';
-import SubscriptionCard from '../../components/SubscriptionCard/SubscriptionCard';
+import SubscriptionCard from '../../components/subscriptionCard/SubscriptionCard';
 import SubscriptionModal from '../../components/ui/modal/SubscriptionModal';
 import { useStores } from '../../services/root-store-context';
 

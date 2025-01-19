@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
 import { fetchSubscriptions, addSubscription, deleteSubscription, SubscriptionData } from '../../utils/api';
-import SubscriptionForm from '../../components/subscriptionAdminDashboard/SubscriptionForm';
-import SubscriptionList from '../../components/subscriptionAdminDashboard/SubscriptionList';
+import SubscriptionForm from '../../components/adminDashboard/subscription/SubscriptionForm';
+import SubscriptionList from '../../components/adminDashboard/subscription/SubscriptionList';
 
 const SubscriptionCardManagement: React.FC = observer(() => {
   const { subscriptionStore } = useStores();

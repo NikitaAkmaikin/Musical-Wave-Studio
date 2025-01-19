@@ -16,3 +16,9 @@
     object-fit: cover;
   }
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
+  gap: 5px; /* Отступы между карточками */
+}

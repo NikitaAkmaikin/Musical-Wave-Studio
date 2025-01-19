@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { notification, Spin } from 'antd';
 import { useStores } from '../../services/root-store-context';
-import { addMusicCard, deleteMusicCard } from '../../utils/api';
-import MusicCardForm from '../../components/musicAdminDashboard/MusicCardForm';
-import MusicCardList from '../../components/musicAdminDashboard/MusicCardList';
+import { addMusicCard, deleteMusicCard, MusicCardData } from '../../utils/api';
+import MusicCardForm from '../../components/adminDashboard/music/MusicCardForm';
+import MusicCardList from '../../components/adminDashboard/music/MusicCardList';
 import { dev } from '../../const/href';
 
 const MusicCardManagement: React.FC = observer(() => {
@@ -22,7 +22,7 @@ const MusicCardManagement: React.FC = observer(() => {
     fetchData();
   }, [musicStore]);
 
-  const handleAddMusicCard = async (values: any, file: File | null) => {
+  const handleAddMusicCard = async (values: MusicCardData, file: File | null) => {
     setActionLoading(true);
     try {
       const newCard = await addMusicCard({ ...values, image: file });

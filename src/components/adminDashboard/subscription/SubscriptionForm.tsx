@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useForm, Controller } from 'react-hook-form';
-import { SubscriptionData } from '../../utils/api';
+import { SubscriptionData } from '../../../utils/api';
 
 interface SubscriptionFormProps {
   onSubmit: (values: SubscriptionData) => void;

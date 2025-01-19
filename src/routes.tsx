@@ -13,7 +13,7 @@ import { UserProvider } from './services/store/UserContext';
 import Register from './pages/register/Register';
 import MusicCardManagement from './pages/music-card-management/MusicCardManagement';
 import SubscriptionCardManagement from './pages/subscription-card-management/SubscriptionCardManagement';
-import Catalog from './pages/Catalog';
+import Catalog from './pages/сatalog/Catalog';
 
 // Типизация для RootStoreProvider
 interface RootStoreProviderProps {
