@@ -5,7 +5,7 @@ import SubscriptionCard from '../../components/subscriptionCard/SubscriptionCard
 import SubscriptionModal from '../../components/ui/modal/SubscriptionModal';
 import { useStores } from '../../services/root-store-context';
 
-export const Subscriptions: FC = observer(() => {
+const Subscriptions: FC = observer(() => {
   const { subscriptionStore } = useStores();
 
   useEffect(() => {
@@ -51,4 +51,4 @@ export const Subscriptions: FC = observer(() => {
   );
 });
 
-
+export default Subscriptions;
