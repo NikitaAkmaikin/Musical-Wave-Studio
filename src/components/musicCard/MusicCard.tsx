@@ -35,15 +35,15 @@ const MusicCard: FC<MusicCardProps> = memo(
     return (
       <Card
         hoverable={!isModal}
-        className={`transform transition-transform duration-300 ${
+        className={` transform transition-transform duration-300 ${
           !isModal ? 'hover:translate-y-[-5px] hover:shadow-lg' : ''
-        } rounded-lg border border-transparent`}
+        } rounded-lg border border-transparent flex flex-col h-full`}
         cover={
-          <div className="relative overflow-hidden rounded-lg">
+          <div className={`relative overflow-hidden rounded-lg `}>
             <img
               alt={title}
               src={imageUrl}
-              className={`w-full h-auto object-cover rounded-lg transition-opacity duration-300 ${!isModal ? 'hover:opacity-80' : ''}`}
+              className={`${!isModal ? 'hover:opacity-80 h-auto' : ' h-full'}  w-full object-cover rounded-lg transition-opacity duration-300 hover:opacity-80`}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/default-placeholder.png'; // Файл-заглушка
               }}

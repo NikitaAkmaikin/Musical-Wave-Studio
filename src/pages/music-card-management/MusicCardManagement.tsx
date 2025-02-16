@@ -58,7 +58,7 @@ const MusicCardManagement: React.FC = observer(() => {
 
   return (
     <div className="flex-direction-column">
-      <h2>Управление Мероприятиями</h2>
+      <h2>Управление Ассортиментом</h2>
       <MusicCardForm onSubmit={handleAddMusicCard} loading={actionLoading} />
       <div className="backgroundCard" style={{ marginTop: '20px' }}>
         {listLoading ? (
@@ -69,7 +69,7 @@ const MusicCardManagement: React.FC = observer(() => {
               id: item.id,
               title: item.title,
               description: item.description,
-              image: `${dev}/api/music-directions/image/${item.image}`,
+              image: `${dev}/api/music-products/image/${item.image}`,
             }))}
             onDelete={handleDeleteMusicCard}
             loading={actionLoading}

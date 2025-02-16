@@ -54,7 +54,7 @@ export const Subscriptions: FC = observer(() => {
   if (subscriptionStore.isLoading) {
     return (
       <div className="container">
-        <h1 style={{ textAlign: 'center' }}>Абонементы</h1>
+        <h1 style={{ textAlign: 'center' }}>Скидки</h1>
         <Row gutter={[16, 16]} style={{ boxSizing: 'border-box' }}>
           {Array.from({ length: 6 }).map((_, index) => (
             <Col key={index} xs={24} sm={12} md={8}>
@@ -76,7 +76,7 @@ export const Subscriptions: FC = observer(() => {
           </Col>
         ))}
       </Row> */}
-      <p className='text-aling'>Не удалось загрузить абонементы</p>
+      <p className='text-aling'>Не удалось загрузить Скидки</p>
       <SubscriptionModal />
     </div>
   );
@@ -84,7 +84,7 @@ export const Subscriptions: FC = observer(() => {
 
   return (
     <div className="container">
-      <h1 style={{ textAlign: 'center' }}>Абонементы</h1>
+      <h1 style={{ textAlign: 'center' }}>Скидки</h1>
       <Row gutter={[16, 16]} style={{ boxSizing: 'border-box' }}>
         {subscriptionStore.subscriptions.map((subscription) => (
           <Col key={subscription.id} xs={24} sm={12} md={8}>

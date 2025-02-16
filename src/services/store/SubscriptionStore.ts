@@ -57,7 +57,7 @@ class SubscriptionStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = 'Не удалось загрузить абонементы';
+        this.error = 'Не удалось загрузить Скидки';
       });
       console.error('Ошибка при загрузке абонементов:', error);
     } finally {

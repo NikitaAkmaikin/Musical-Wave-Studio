@@ -26,7 +26,7 @@ const AdminDashboard: React.FC = () => {
           </Button>
         </Link>
         <Link to="/admin">
-          <Button icon={<StarFilled />} type="primary">Управление Мероприятиями</Button>
+          <Button icon={<StarFilled />} type="primary">Управление Ассортиментом</Button>
         </Link>
 
         <Link to="/admin/subscription-card">

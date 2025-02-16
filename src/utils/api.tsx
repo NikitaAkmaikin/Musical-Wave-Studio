@@ -62,13 +62,13 @@ export const addMusicCard = async (data: MusicCardData) => {
     formData.append('image', data.image);
   }
 
-  const response = await axios.post(`${dev}/api/music-directions`, formData);
+  const response = await axios.post(`${dev}/api/products`, formData);
   return response.data;
 };
 
 // Функция для удаления музыкальной карточки
 export const deleteMusicCard = async (id: number) => {
-  const response = await axios.delete(`${dev}/api/music-directions/${id}`);
+  const response = await axios.delete(`${dev}/api/products/${id}`);
   return response.data;
 };
 

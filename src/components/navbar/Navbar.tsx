@@ -39,18 +39,18 @@ const Navbar: FC = memo(() => {
       key: 'home',
       icon: <HomeFilled />,
     },
+    // {
+    //   label: <NavLink to="/catalog">Каталог</NavLink>,
+    //   key: 'catalog',
+    //   icon: <StarFilled />,
+    // },
     {
-      label: <NavLink to="/catalog">Каталог</NavLink>,
-      key: 'catalog',
+      label: <NavLink to="/products">Товары</NavLink>,
+      key: 'products',
       icon: <StarFilled />,
     },
     {
-      label: <NavLink to="/music-directions">Мероприятия</NavLink>,
-      key: 'music-directions',
-      icon: <StarFilled />,
-    },
-    {
-      label: <NavLink to="/subscriptions">Абонементы</NavLink>,
+      label: <NavLink to="/subscriptions">Скидки</NavLink>,
       key: 'subscriptions',
       icon: <IdcardFilled />,
     },

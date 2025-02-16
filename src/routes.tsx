@@ -13,7 +13,7 @@ import { UserProvider } from './services/store/UserContext';
 import Register from './pages/register/Register';
 import MusicCardManagement from './pages/music-card-management/MusicCardManagement';
 import SubscriptionCardManagement from './pages/subscription-card-management/SubscriptionCardManagement';
-import Catalog from './pages/сatalog/Catalog';
+// import Catalog from './pages/сatalog/Catalog';
 
 // Типизация для RootStoreProvider
 interface RootStoreProviderProps {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'music-directions',
+        path: 'products',
         element: <RootStoreProvider><MusicDirections /></RootStoreProvider>,
       },
       {
@@ -49,10 +49,10 @@ const router = createBrowserRouter([
         path: 'contact',
         element: <Contact />,
       },
-      {
-        path: 'catalog',
-        element: <Catalog />,
-      },
+      // {
+      //   path: 'catalog',
+      //   element: <Catalog />,
+      // },
     ],
   },
   {

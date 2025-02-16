@@ -15,7 +15,7 @@ export const MusicDirections: React.FC = observer(() => {
   if (musicStore.isLoading) {
     return (
       <div className="container">
-        <h1>Мероприятия</h1>
+        <h1>Ассортимент</h1>
         <Row gutter={[16, 16]} style={{ boxSizing: 'border-box' }}>
           {Array.from({ length: 6 }).map((_, index) => (
             <Col key={index} xs={24} sm={12} md={6}>
@@ -37,13 +37,13 @@ export const MusicDirections: React.FC = observer(() => {
           ))}
         </Row> */}
       <MusicModal />
-        <p className='text-aling'>Не удалось загрузить мероприятия</p>
+        <p className='text-aling'>Не удалось загрузить Ассортимент</p>
       </div>);
   }
 
   return (
     <div className="container">
-      <h1>Мероприятия</h1>
+      <h1 style={{marginBottom: '30px'}}>Ассортимент</h1>
       {musicStore.directions.length <= 0 ? (
         <p>Ничего нет</p>
       ) : (

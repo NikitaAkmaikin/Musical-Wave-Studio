@@ -15,11 +15,11 @@ export const NotFound404: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      <h1 className={s.title}>
-        Упс! 404 - Мы не смогли найти подходящую мелодию!
+     <h1 className={s.title}>
+        Упс! 404 - Мы не смогли найти нужный товар!
       </h1>
       <p className={s.subtitle}>
-        Кажется, что ты не в своей тарелке. Давайте вернем вас в ритм!
+        Кажется, вы забрели не туда. Давайте вернем вас к покупкам!
       </p>
       <div className={s.links}>
         <Link
@@ -29,10 +29,10 @@ export const NotFound404: React.FC = () => {
           Вернуться на главную
         </Link>
         <Link
-          to="/music-directions"
+          to="/products"
           className={s.link}
         >
-          Вернуться к музыкальным направлениям
+          Вернуться к каталогу товаров
         </Link>
       </div>
     </div>
