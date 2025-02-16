@@ -1,7 +1,7 @@
 // src/routes/Routes.tsx
 import{ FC, ReactNode } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, MusicDirections, NotFound404, Subscriptions } from './pages';
+import { Home, MusicDirections, NotFound404 } from './pages';
 import { Contact } from './pages/contact';
 import App from './app/App';
 import { RootStoreContext } from './services/root-store-context';
@@ -13,6 +13,7 @@ import { UserProvider } from './services/store/UserContext';
 import Register from './pages/register/Register';
 import MusicCardManagement from './pages/music-card-management/MusicCardManagement';
 import SubscriptionCardManagement from './pages/subscription-card-management/SubscriptionCardManagement';
+import Subscriptions from './pages/subscriptions/Subscriptions';
 // import Catalog from './pages/сatalog/Catalog';
 
 // Типизация для RootStoreProvider
