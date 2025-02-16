@@ -25,7 +25,7 @@ const MusicCardManagement: React.FC = observer(() => {
   const handleAddMusicCard = async (values: MusicCardData, file: File | null) => {
     setActionLoading(true);
     try {
-      const newCard = await addMusicCard({ ...values, image: file });
+      const newCard = await addMusicCard({ ...values, image: file || undefined });
       musicStore.directions.push(newCard); // Локальное обновление списка
       notification.success({ message: 'Направление добавлено успешно!' });
     } catch {

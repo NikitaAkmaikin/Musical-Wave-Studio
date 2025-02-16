@@ -1,5 +1,5 @@
 // src/routes/Routes.tsx
-import React, { FC, ReactNode } from 'react';
+import{ FC, ReactNode } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Home, MusicDirections, NotFound404, Subscriptions } from './pages';
 import { Contact } from './pages/contact';

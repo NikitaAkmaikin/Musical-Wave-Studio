@@ -97,4 +97,4 @@ export const Subscriptions: FC = observer(() => {
   );
 });
 
-export default Subscriptions;
+
